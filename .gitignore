@@ -1,0 +1,26 @@
+# temp/backup files
+*.swp
+
+# binary, object files, distribution files
+src/**/*.o
+buildsh
+*.tar.*
+
+# autotools
+autom4te.cache/
+build-aux/
+configure
+Makefile
+Makefile.in
+src/config.h*
+aclocal.m4
+config.log
+config.status
+src/**/.deps/
+src/**/stamp-h1
+src/**/.dirstamp
+
+# tests
+tests/**/*.log
+tests/**/*.trs
+test-suite.log
