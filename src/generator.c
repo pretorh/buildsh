@@ -11,7 +11,7 @@ void make_build_dir() {
     printf("cd build\n");
 }
 
-void cleanup(const char *dir_name) {
-    printf("cd ..\n");
+void cleanup(const char *dir_name, int nested_dir) {
+    printf("cd ../%s\n", nested_dir ? "../" : "");
     printf("rm -rf %s\n", dir_name);
 }
