@@ -12,6 +12,7 @@
 struct Settings {
     const char *name;
     char archive[PATH_MAX + 1];
+    int build_outside_sources;
 };
 
 void parse_settings(int argc, char *argv[], struct Settings *settings);
@@ -37,9 +38,10 @@ void parse_settings(int argc, char *argv[], struct Settings *settings) {
 }
 
 void parse_arguments(int argc, char *argv[], struct Settings *settings) {
-    static const char short_options[] = "";
-    static struct option long_options[] = {
-        {"archive", required_argument, 0, 'a'},
+    const char short_options[] = "";
+    struct option long_options[] = {
+        {"archive",                 required_argument, 0, 'a'},
+        {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
         {0, 0, 0, 0}
     };
 
@@ -49,6 +51,10 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
             case 'a':
                 strncpy(settings->archive, optarg, PATH_MAX);
                 break;
+
+            case 0:
+                if (long_options[index].flag != 0)
+                    break; // flag set
 
             case '?':
             default:
