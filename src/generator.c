@@ -22,8 +22,8 @@ void configure(int nested_dir, const char *arguments) {
     EMPTY_LINE
 }
 
-void build() {
-    printf("make --jobs\n");
+void build(int max_jobs) {
+    printf("make --jobs %d\n", max_jobs);
     EMPTY_LINE
 }
 
