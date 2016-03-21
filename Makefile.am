@@ -2,7 +2,8 @@ bin_PROGRAMS = buildsh
 EXTRA_DIST = $(TESTS)
 
 TESTS =
-XFAIL_TESTS =
+TESTS += tests/extract-sources.sh
 
-buildsh_SOURCES = src/main.c
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra
+buildsh_SOURCES = src/main.c
+buildsh_SOURCES += src/generator.c
