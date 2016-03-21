@@ -12,7 +12,9 @@
 struct Settings {
     const char *name;
     char archive[PATH_MAX + 1];
+
     char source_setup[8192];
+    char config_dir[PATH_MAX + 1];
     char config_options[8192];
     char make_options[8192];
     char install_commands[8192];
@@ -24,6 +26,7 @@ struct Settings {
 void parse_settings(int argc, char *argv[], struct Settings *settings);
 void parse_arguments(int argc, char *argv[], struct Settings *settings);
 void parse_name_from_remaining(int argc, char *argv[], struct Settings *settings);
+void parse_flag_set(const char *name, struct Settings *settings);
 void parse_long_option(const char *name, const char *value, struct Settings *settings);
 
 int main(int argc, char *argv[]) {
@@ -34,7 +37,7 @@ int main(int argc, char *argv[]) {
     run(settings.source_setup);
     if (settings.build_outside_sources)
         make_build_dir();
-    configure(settings.build_outside_sources, settings.config_options);
+    configure(settings.config_dir, settings.config_options);
     build(settings.max_make_jobs, settings.make_options);
     install(settings.install_commands);
     cleanup(settings.name, settings.build_outside_sources);
@@ -50,6 +53,7 @@ void parse_settings(int argc, char *argv[], struct Settings *settings) {
     parse_name_from_remaining(argc, argv, settings);
 
     APPLY_DEFAULT(settings->archive, "%s.tar.*", settings->name);
+    APPLY_DEFAULT(settings->config_dir, "%s", ".");
 }
 
 void parse_arguments(int argc, char *argv[], struct Settings *settings) {
@@ -74,8 +78,11 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
                 break;
 
             case 0:
-                if (long_options[index].flag != 0)
-                    break; // flag set
+                if (long_options[index].flag != 0) {
+                    parse_flag_set(long_options[index].name, settings);
+                    break;
+                }
+
                 parse_long_option(long_options[index].name, optarg, settings);
                 break;
 
@@ -92,6 +99,12 @@ void parse_name_from_remaining(int argc, char *argv[], struct Settings *settings
         exit(EXIT_FAILURE);
     }
     settings->name = argv[optind];
+}
+
+void parse_flag_set(const char *name, struct Settings *settings) {
+    if (strcmp("build-outside-sources", name) == 0 && *settings->config_dir == 0) {
+        strcpy(settings->config_dir, "..");
+    }
 }
 
 void parse_long_option(const char *name, const char *value, struct Settings *settings) {

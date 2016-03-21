@@ -15,9 +15,9 @@ void make_build_dir() {
     EMPTY_LINE
 }
 
-void configure(int nested_dir, const char *arguments) {
+void configure(const char *dir, const char *arguments) {
     printf("%s/configure%s\n",
-        nested_dir ? ".." : ".",
+        dir,
         arguments);
     EMPTY_LINE
 }

@@ -3,7 +3,7 @@
 
 void extract(const char *archive, const char *name);
 void make_build_dir();
-void configure(int nested_dir, const char *arguments);
+void configure(const char *dir, const char *arguments);
 void build(int max_jobs, const char *arguments);
 void install(const char *custom_commands);
 void cleanup(const char *dir_name, int nested_dir);
