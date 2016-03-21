@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
     extract(settings.archive, settings.name);
     if (settings.build_outside_sources)
         make_build_dir();
-    configure();
+    configure(settings.build_outside_sources);
     cleanup(settings.name, settings.build_outside_sources);
 
     return 0;
