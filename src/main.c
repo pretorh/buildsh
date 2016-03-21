@@ -23,6 +23,7 @@ int main(int argc, char *argv[]) {
     parse_settings(argc, argv, &settings);
 
     extract(settings.archive, settings.name);
+    cleanup(settings.name);
 
     return 0;
 }
