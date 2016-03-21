@@ -22,6 +22,16 @@ void configure(int nested_dir, const char *arguments) {
     EMPTY_LINE
 }
 
+void build() {
+    printf("make --jobs\n");
+    EMPTY_LINE
+}
+
+void install() {
+    printf("make install\n");
+    EMPTY_LINE
+}
+
 void cleanup(const char *dir_name, int nested_dir) {
     printf("cd ../%s\n", nested_dir ? "../" : "");
     printf("rm -rf %s\n", dir_name);

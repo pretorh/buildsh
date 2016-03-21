@@ -30,6 +30,8 @@ int main(int argc, char *argv[]) {
     if (settings.build_outside_sources)
         make_build_dir();
     configure(settings.build_outside_sources, settings.config_options);
+    build();
+    install();
     cleanup(settings.name, settings.build_outside_sources);
 
     return 0;

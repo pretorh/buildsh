@@ -7,6 +7,8 @@ TESTS += tests/extract-sources-from-archive.sh
 TESTS += tests/build-dir.sh
 TESTS += tests/configure.sh
 TESTS += tests/configure-options.sh
+TESTS += tests/build.sh
+TESTS += tests/install.sh
 TESTS += tests/cleanup.sh
 
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra
