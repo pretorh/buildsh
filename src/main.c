@@ -58,6 +58,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"archive",                 required_argument, 0, 'a'},
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
         {"config-opt",              required_argument, 0, 0},
+        {"config-val",              required_argument, 0, 0},
         {"install-using",           required_argument, 0, 0},
         {"make",                    required_argument, 0, 0},
         {"max-jobs",                required_argument, 0, 0},
@@ -96,6 +97,9 @@ void parse_name_from_remaining(int argc, char *argv[], struct Settings *settings
 void parse_long_option(const char *name, const char *value, struct Settings *settings) {
     if (strcmp("config-opt", name) == 0) {
         strcat(settings->config_options, " --");
+        strcat(settings->config_options, value);
+    } else if (strcmp("config-val", name) == 0) {
+        strcat(settings->config_options, " ");
         strcat(settings->config_options, value);
     } else if (strcmp("install-using", name) == 0) {
         strcat(settings->install_commands, value);
