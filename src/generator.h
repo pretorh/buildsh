@@ -7,5 +7,6 @@ void configure(int nested_dir, const char *arguments);
 void build();
 void install();
 void cleanup(const char *dir_name, int nested_dir);
+void run(const char *commands);
 
 #endif

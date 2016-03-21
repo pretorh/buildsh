@@ -37,3 +37,9 @@ void cleanup(const char *dir_name, int nested_dir) {
     printf("rm -rf %s\n", dir_name);
     EMPTY_LINE
 }
+
+void run(const char *commands) {
+    if (*commands == 0)
+        return;
+    printf("%s\n", commands);
+}

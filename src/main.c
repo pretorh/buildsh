@@ -13,6 +13,7 @@ struct Settings {
     const char *name;
     char archive[PATH_MAX + 1];
     char config_options[8192];
+    char source_setup[8192];
 
     int build_outside_sources;
 };
@@ -27,6 +28,7 @@ int main(int argc, char *argv[]) {
     parse_settings(argc, argv, &settings);
 
     extract(settings.archive, settings.name);
+    run(settings.source_setup);
     if (settings.build_outside_sources)
         make_build_dir();
     configure(settings.build_outside_sources, settings.config_options);
@@ -52,6 +54,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"archive",                 required_argument, 0, 'a'},
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
         {"config-opt",              required_argument, 0, 0},
+        {"source-setup",            required_argument, 0, 0},
         {0, 0, 0, 0}
     };
 
@@ -87,6 +90,9 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
     if (strcmp("config-opt", name) == 0) {
         strcat(settings->config_options, " --");
         strcat(settings->config_options, value);
+    } else if (strcmp("source-setup", name) == 0) {
+        strcat(settings->source_setup, value);
+        strcat(settings->source_setup, "\n");
     } else {
         fprintf(stderr, "long option not implemented: %s\n", name);
         exit(EXIT_FAILURE);

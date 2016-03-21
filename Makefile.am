@@ -4,6 +4,7 @@ EXTRA_DIST = $(TESTS)
 TESTS =
 TESTS += tests/extract-sources.sh
 TESTS += tests/extract-sources-from-archive.sh
+TESTS += tests/source-setup.sh
 TESTS += tests/build-dir.sh
 TESTS += tests/configure.sh
 TESTS += tests/configure-options.sh
