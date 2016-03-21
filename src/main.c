@@ -26,6 +26,7 @@ int main(int argc, char *argv[]) {
     extract(settings.archive, settings.name);
     if (settings.build_outside_sources)
         make_build_dir();
+    configure();
     cleanup(settings.name, settings.build_outside_sources);
 
     return 0;
@@ -33,6 +34,7 @@ int main(int argc, char *argv[]) {
 
 void parse_settings(int argc, char *argv[], struct Settings *settings) {
     memset(settings, 0, sizeof(*settings));
+
     parse_arguments(argc, argv, settings);
     parse_name_from_remaining(argc, argv, settings);
 
