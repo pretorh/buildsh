@@ -19,6 +19,7 @@ struct Settings {
     char config_options[8192];
     char make_options[8192];
     char install_commands[8192];
+    char install_post[8192];
 
     int build_outside_sources;
     int max_make_jobs;
@@ -41,6 +42,7 @@ int main(int argc, char *argv[]) {
     configure(settings.config_dir, settings.config_env, settings.config_options);
     build(settings.max_make_jobs, settings.make_options);
     install(settings.install_commands);
+    run(settings.install_post);
     cleanup(settings.name, settings.build_outside_sources);
 
     return 0;
@@ -69,6 +71,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"install-using",           required_argument, 0, 0},
         {"make",                    required_argument, 0, 0},
         {"max-jobs",                required_argument, 0, 0},
+        {"post",                    required_argument, 0, 0},
         {"source-setup",            required_argument, 0, 0},
         {0, 0, 0, 0}
     };
@@ -130,6 +133,9 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
         strcat(settings->make_options, value);
     } else if (strcmp("max-jobs", name) == 0) {
         settings->max_make_jobs = atoi(value);
+    } else if (strcmp("post", name) == 0) {
+        strcat(settings->install_post, value);
+        strcat(settings->install_post, "\n");
     } else if (strcmp("source-setup", name) == 0) {
         strcat(settings->source_setup, value);
         strcat(settings->source_setup, "\n");
