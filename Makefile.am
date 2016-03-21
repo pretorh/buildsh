@@ -4,6 +4,7 @@ EXTRA_DIST = $(TESTS)
 TESTS =
 TESTS += tests/extract-sources.sh
 TESTS += tests/extract-sources-from-archive.sh
+TESTS += tests/build-dir.sh
 TESTS += tests/cleanup.sh
 
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra

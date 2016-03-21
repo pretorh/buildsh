@@ -24,6 +24,8 @@ int main(int argc, char *argv[]) {
     parse_settings(argc, argv, &settings);
 
     extract(settings.archive, settings.name);
+    if (settings.build_outside_sources)
+        make_build_dir();
     cleanup(settings.name);
 
     return 0;
