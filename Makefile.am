@@ -12,6 +12,7 @@ TESTS += tests/build.sh
 TESTS += tests/build-max-jobs.sh
 TESTS += tests/build-options.sh
 TESTS += tests/install.sh
+TESTS += tests/install-custom.sh
 TESTS += tests/cleanup.sh
 
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra

@@ -5,8 +5,8 @@ void extract(const char *archive, const char *name);
 void make_build_dir();
 void configure(int nested_dir, const char *arguments);
 void build(int max_jobs, const char *arguments);
-void install();
+void install(const char *custom_commands);
 void cleanup(const char *dir_name, int nested_dir);
-void run(const char *commands);
+int run(const char *commands);
 
 #endif

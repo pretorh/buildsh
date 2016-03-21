@@ -27,7 +27,10 @@ void build(int max_jobs, const char *arguments) {
     EMPTY_LINE
 }
 
-void install() {
+void install(const char *custom_commands) {
+    if (run(custom_commands))
+        return;
+
     printf("make install\n");
     EMPTY_LINE
 }
@@ -38,8 +41,9 @@ void cleanup(const char *dir_name, int nested_dir) {
     EMPTY_LINE
 }
 
-void run(const char *commands) {
+int run(const char *commands) {
     if (*commands == 0)
-        return;
+        return 0;
     printf("%s\n", commands);
+    return 1;
 }
