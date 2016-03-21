@@ -15,8 +15,9 @@ void make_build_dir() {
     EMPTY_LINE
 }
 
-void configure(const char *dir, const char *arguments) {
-    printf("%s/configure%s\n",
+void configure(const char *dir, const char *env, const char *arguments) {
+    printf("%s%s/configure%s\n",
+        env,
         dir,
         arguments);
     EMPTY_LINE

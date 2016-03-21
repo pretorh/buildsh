@@ -9,6 +9,7 @@ TESTS += tests/build-dir.sh
 TESTS += tests/configure.sh
 TESTS += tests/configure-options.sh
 TESTS += tests/configure-dir.sh
+TESTS += tests/configure-env.sh
 TESTS += tests/build.sh
 TESTS += tests/build-max-jobs.sh
 TESTS += tests/build-options.sh
