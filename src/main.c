@@ -12,12 +12,15 @@
 struct Settings {
     const char *name;
     char archive[PATH_MAX + 1];
+    char config_options[8192];
+
     int build_outside_sources;
 };
 
 void parse_settings(int argc, char *argv[], struct Settings *settings);
 void parse_arguments(int argc, char *argv[], struct Settings *settings);
 void parse_name_from_remaining(int argc, char *argv[], struct Settings *settings);
+void parse_long_option(const char *name, const char *value, struct Settings *settings);
 
 int main(int argc, char *argv[]) {
     struct Settings settings;
@@ -26,7 +29,7 @@ int main(int argc, char *argv[]) {
     extract(settings.archive, settings.name);
     if (settings.build_outside_sources)
         make_build_dir();
-    configure(settings.build_outside_sources);
+    configure(settings.build_outside_sources, settings.config_options);
     cleanup(settings.name, settings.build_outside_sources);
 
     return 0;
@@ -46,6 +49,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
     struct option long_options[] = {
         {"archive",                 required_argument, 0, 'a'},
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
+        {"config-opt",              required_argument, 0, 0},
         {0, 0, 0, 0}
     };
 
@@ -59,6 +63,8 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
             case 0:
                 if (long_options[index].flag != 0)
                     break; // flag set
+                parse_long_option(long_options[index].name, optarg, settings);
+                break;
 
             case '?':
             default:
@@ -73,4 +79,14 @@ void parse_name_from_remaining(int argc, char *argv[], struct Settings *settings
         exit(EXIT_FAILURE);
     }
     settings->name = argv[optind];
+}
+
+void parse_long_option(const char *name, const char *value, struct Settings *settings) {
+    if (strcmp("config-opt", name) == 0) {
+        strcat(settings->config_options, " --");
+        strcat(settings->config_options, value);
+    } else {
+        fprintf(stderr, "long option not implemented: %s\n", name);
+        exit(EXIT_FAILURE);
+    }
 }
