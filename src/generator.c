@@ -23,7 +23,10 @@ void configure(const char *dir, const char *env, const char *arguments) {
     EMPTY_LINE
 }
 
-void build(int max_jobs, const char *arguments) {
+void build(int max_jobs, const char *arguments, const char *custom_commands) {
+    if (run(custom_commands))
+        return;
+
     printf("make --jobs %d %s\n", max_jobs, arguments);
     EMPTY_LINE
 }

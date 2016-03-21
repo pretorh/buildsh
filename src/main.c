@@ -18,6 +18,7 @@ struct Settings {
     char config_env[8192];
     char config_options[8192];
     char make_options[8192];
+    char build_commands[8192];
     char install_commands[8192];
     char install_post[8192];
 
@@ -40,7 +41,7 @@ int main(int argc, char *argv[]) {
     if (settings.build_outside_sources)
         make_build_dir();
     configure(settings.config_dir, settings.config_env, settings.config_options);
-    build(settings.max_make_jobs, settings.make_options);
+    build(settings.max_make_jobs, settings.make_options, settings.build_commands);
     install(settings.install_commands);
     run(settings.install_post);
     cleanup(settings.name, settings.build_outside_sources);
@@ -64,6 +65,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
     struct option long_options[] = {
         {"archive",                 required_argument, 0, 'a'},
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
+        {"build-using",             required_argument, 0, 0},
         {"config-dir",              required_argument, 0, 0},
         {"config-env",              required_argument, 0, 0},
         {"config-opt",              required_argument, 0, 0},
@@ -114,7 +116,10 @@ void parse_flag_set(const char *name, struct Settings *settings) {
 }
 
 void parse_long_option(const char *name, const char *value, struct Settings *settings) {
-    if (strcmp("config-dir", name) == 0) {
+    if (strcmp("build-using", name) == 0) {
+        strcat(settings->build_commands, value);
+        strcat(settings->build_commands, "\n");
+    } else if (strcmp("config-dir", name) == 0) {
         strcpy(settings->config_dir, value);
     } else if (strcmp("config-env", name) == 0) {
         strcat(settings->config_env, value);

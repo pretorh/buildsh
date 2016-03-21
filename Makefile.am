@@ -13,6 +13,7 @@ TESTS += tests/configure-env.sh
 TESTS += tests/build.sh
 TESTS += tests/build-max-jobs.sh
 TESTS += tests/build-options.sh
+TESTS += tests/build-custom.sh
 TESTS += tests/install.sh
 TESTS += tests/install-custom.sh
 TESTS += tests/post-install.sh
