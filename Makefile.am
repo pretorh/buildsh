@@ -10,6 +10,7 @@ TESTS += tests/configure.sh
 TESTS += tests/configure-options.sh
 TESTS += tests/build.sh
 TESTS += tests/build-max-jobs.sh
+TESTS += tests/build-options.sh
 TESTS += tests/install.sh
 TESTS += tests/cleanup.sh
 
