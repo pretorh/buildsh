@@ -16,6 +16,7 @@ TESTS += tests/build-options.sh
 TESTS += tests/build-custom.sh
 TESTS += tests/test-off-by-default.sh
 TESTS += tests/test.sh
+TESTS += tests/test-custom.sh
 TESTS += tests/install.sh
 TESTS += tests/install-custom.sh
 TESTS += tests/post-install.sh

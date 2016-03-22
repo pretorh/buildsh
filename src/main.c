@@ -31,7 +31,7 @@ struct Settings {
 void parse_settings(int argc, char *argv[], struct Settings *settings);
 void parse_arguments(int argc, char *argv[], struct Settings *settings);
 void parse_name_from_remaining(int argc, char *argv[], struct Settings *settings);
-void parse_flag_set(const char *name, struct Settings *settings);
+void parse_flag_set(const char *name, const char *value, struct Settings *settings);
 void parse_long_option(const char *name, const char *value, struct Settings *settings);
 
 int main(int argc, char *argv[]) {
@@ -80,7 +80,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"max-jobs",                required_argument, 0, 0},
         {"post",                    required_argument, 0, 0},
         {"source-setup",            required_argument, 0, 0},
-        {"test",                    no_argument      , &settings->do_test, 1},
+        {"test",                    optional_argument, &settings->do_test, 1},
         {0, 0, 0, 0}
     };
 
@@ -93,7 +93,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
 
             case 0:
                 if (long_options[index].flag != 0) {
-                    parse_flag_set(long_options[index].name, settings);
+                    parse_flag_set(long_options[index].name, optarg, settings);
                     break;
                 }
 
@@ -115,9 +115,12 @@ void parse_name_from_remaining(int argc, char *argv[], struct Settings *settings
     settings->name = argv[optind];
 }
 
-void parse_flag_set(const char *name, struct Settings *settings) {
+void parse_flag_set(const char *name, const char *value, struct Settings *settings) {
     if (strcmp("build-outside-sources", name) == 0 && *settings->config_dir == 0) {
         strcpy(settings->config_dir, "..");
+    } else if (strcmp("test", name) == 0 && value) {
+        strcat(settings->test_commands, value);
+        strcat(settings->test_commands, "\n");
     }
 }
 
