@@ -24,6 +24,7 @@ struct Settings {
 
     int build_outside_sources;
     int max_make_jobs;
+    int do_test;
 };
 
 void parse_settings(int argc, char *argv[], struct Settings *settings);
@@ -42,6 +43,8 @@ int main(int argc, char *argv[]) {
         make_build_dir();
     configure(settings.config_dir, settings.config_env, settings.config_options);
     build(settings.max_make_jobs, settings.make_options, settings.build_commands);
+    if (settings.do_test)
+        run("make check\n");
     install(settings.install_commands);
     run(settings.install_post);
     cleanup(settings.name, settings.build_outside_sources);
@@ -75,6 +78,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"max-jobs",                required_argument, 0, 0},
         {"post",                    required_argument, 0, 0},
         {"source-setup",            required_argument, 0, 0},
+        {"test",                    no_argument      , &settings->do_test, 1},
         {0, 0, 0, 0}
     };
 
