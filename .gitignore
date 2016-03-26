@@ -10,7 +10,7 @@ buildsh-*/
 # autotools
 autom4te.cache/
 build-aux/
-configure
+/configure
 Makefile
 Makefile.in
 src/config.h*
