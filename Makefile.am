@@ -1,5 +1,5 @@
 bin_PROGRAMS = buildsh
-EXTRA_DIST = $(TESTS)
+EXTRA_DIST = $(TESTS) tests/setup.sh
 
 TESTS =
 
@@ -31,4 +31,4 @@ TESTS += tests/post/cleanup.sh
 
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra
 buildsh_SOURCES = src/main.c
-buildsh_SOURCES += src/generator.c
+buildsh_SOURCES += src/generator.c src/generator.h
