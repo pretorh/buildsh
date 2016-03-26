@@ -27,6 +27,7 @@ struct Settings {
     int build_outside_sources;
     int max_make_jobs;
     int do_configure;
+    int do_build;
     int do_test;
 };
 
@@ -48,7 +49,8 @@ int main(int argc, char *argv[]) {
     if (settings.do_configure)
         run(settings.configure_commands);
 
-    run(settings.build_commands);
+    if (settings.do_build)
+        run(settings.build_commands);
     if (settings.do_test)
         run(settings.test_commands);
     run(settings.install_commands);
@@ -62,6 +64,7 @@ void parse_settings(int argc, char *argv[], struct Settings *settings) {
     memset(settings, 0, sizeof(*settings));
     settings->max_make_jobs = 4;
     settings->do_configure = 1;
+    settings->do_build = 1;
 
     parse_arguments(argc, argv, settings);
     parse_name_from_remaining(argc, argv, settings);
@@ -84,6 +87,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"archive",                 required_argument, 0, 'a'},
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
         {"build-using",             required_argument, 0, 0},
+        {"no-build",                no_argument     , &settings->do_build, 0},
         {"no-configure",            no_argument     , &settings->do_configure, 0},
         {"configure-dir",           required_argument, 0, 0},
         {"configure-env",           required_argument, 0, 0},
