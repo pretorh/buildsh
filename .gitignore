@@ -5,6 +5,7 @@
 src/**/*.o
 buildsh
 *.tar.*
+buildsh-*/
 
 # autotools
 autom4te.cache/
