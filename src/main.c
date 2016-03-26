@@ -71,7 +71,8 @@ void parse_settings(int argc, char *argv[], struct Settings *settings) {
         settings->max_make_jobs, settings->make_options);
     APPLY_DEFAULT(settings->install_commands, "%s\n",
         "make install");
-    APPLY_DEFAULT(settings->test_commands, "%s\n", "make check");
+    APPLY_DEFAULT(settings->test_commands, "make check --jobs %d\n",
+        settings->max_make_jobs);
 }
 
 void parse_arguments(int argc, char *argv[], struct Settings *settings) {
