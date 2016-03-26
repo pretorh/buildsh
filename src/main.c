@@ -18,6 +18,7 @@ struct Settings {
     char config_env[8192];
     char config_options[8192];
     char make_options[8192];
+    char configure_commands[8192];
     char build_commands[8192];
     char test_commands[8192];
     char install_commands[8192];
@@ -45,7 +46,7 @@ int main(int argc, char *argv[]) {
         make_build_dir();
 
     if (settings.do_configure)
-        configure(settings.config_dir, settings.config_env, settings.config_options);
+        run(settings.configure_commands);
 
     run(settings.build_commands);
     if (settings.do_test)
@@ -67,6 +68,8 @@ void parse_settings(int argc, char *argv[], struct Settings *settings) {
 
     APPLY_DEFAULT(settings->archive, "%s.tar.*", settings->name);
     APPLY_DEFAULT(settings->config_dir, "%s", ".");
+    APPLY_DEFAULT(settings->configure_commands, "%s%s/configure%s\n",
+        settings->config_env, settings->config_dir, settings->config_options);
     APPLY_DEFAULT(settings->build_commands, "make --jobs %d %s\n",
         settings->max_make_jobs, settings->make_options);
     APPLY_DEFAULT(settings->install_commands, "%s\n",
