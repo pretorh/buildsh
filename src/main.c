@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     if (settings.build_outside_sources)
         make_build_dir();
     configure(settings.config_dir, settings.config_env, settings.config_options);
-    build(settings.max_make_jobs, settings.make_options, settings.build_commands);
+    run(settings.build_commands);
     if (settings.do_test)
         run(settings.test_commands);
     install(settings.install_commands);
@@ -62,6 +62,8 @@ void parse_settings(int argc, char *argv[], struct Settings *settings) {
 
     APPLY_DEFAULT(settings->archive, "%s.tar.*", settings->name);
     APPLY_DEFAULT(settings->config_dir, "%s", ".");
+    APPLY_DEFAULT(settings->build_commands, "make --jobs %d %s\n",
+        settings->max_make_jobs, settings->make_options);
     APPLY_DEFAULT(settings->test_commands, "%s\n", "make check");
 }
 
