@@ -10,6 +10,7 @@ TESTS += tests/source-setup/run-commands.sh
 TESTS += tests/source-setup/build-dir.sh
 
 TESTS += tests/configure/default-configure.sh
+TESTS += tests/configure/disabled.sh
 TESTS += tests/configure/options.sh
 TESTS += tests/configure/in-custom-dir.sh
 TESTS += tests/configure/prefix-env.sh
