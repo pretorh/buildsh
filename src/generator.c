@@ -23,14 +23,6 @@ void configure(const char *dir, const char *env, const char *arguments) {
     EMPTY_LINE
 }
 
-void install(const char *custom_commands) {
-    if (run(custom_commands))
-        return;
-
-    printf("make install\n");
-    EMPTY_LINE
-}
-
 void cleanup(const char *dir_name, int nested_dir) {
     printf("cd ../%s\n", nested_dir ? "../" : "");
     printf("rm -rf %s\n", dir_name);
