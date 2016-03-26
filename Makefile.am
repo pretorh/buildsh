@@ -14,6 +14,7 @@ TESTS += tests/configure/disabled.sh
 TESTS += tests/configure/options.sh
 TESTS += tests/configure/in-custom-dir.sh
 TESTS += tests/configure/prefix-env.sh
+TESTS += tests/configure/alias-prefix.sh
 
 TESTS += tests/build/default-make.sh
 TESTS += tests/build/make-max-jobs.sh
