@@ -1,5 +1,5 @@
 . "$(dirname $0)/../setup.sh"
 
-./buildsh name --config-dir abc > $LOG
+./buildsh name --configure-dir abc > $LOG
 
 has_output "^abc/configure$"

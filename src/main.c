@@ -81,10 +81,10 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
         {"build-using",             required_argument, 0, 0},
         {"no-configure",            no_argument     , &settings->do_configure, 0},
-        {"config-dir",              required_argument, 0, 0},
-        {"config-env",              required_argument, 0, 0},
-        {"config-opt",              required_argument, 0, 0},
-        {"config-val",              required_argument, 0, 0},
+        {"configure-dir",           required_argument, 0, 0},
+        {"configure-env",           required_argument, 0, 0},
+        {"configure",               required_argument, 0, 0},
+        {"configure-val",           required_argument, 0, 0},
         {"install-using",           required_argument, 0, 0},
         {"make",                    required_argument, 0, 0},
         {"max-jobs",                required_argument, 0, 0},
@@ -138,15 +138,15 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
     if (strcmp("build-using", name) == 0) {
         strcat(settings->build_commands, value);
         strcat(settings->build_commands, "\n");
-    } else if (strcmp("config-dir", name) == 0) {
+    } else if (strcmp("configure-dir", name) == 0) {
         strcpy(settings->config_dir, value);
-    } else if (strcmp("config-env", name) == 0) {
+    } else if (strcmp("configure-env", name) == 0) {
         strcat(settings->config_env, value);
         strcat(settings->config_env, " ");
-    } else if (strcmp("config-opt", name) == 0) {
+    } else if (strcmp("configure", name) == 0) {
         strcat(settings->config_options, " --");
         strcat(settings->config_options, value);
-    } else if (strcmp("config-val", name) == 0) {
+    } else if (strcmp("configure-val", name) == 0) {
         strcat(settings->config_options, " ");
         strcat(settings->config_options, value);
     } else if (strcmp("install-using", name) == 0) {
