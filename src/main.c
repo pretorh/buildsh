@@ -90,6 +90,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"configure",               required_argument, 0, 0},
         {"configure-val",           required_argument, 0, 0},
         {"configure-prefix",        required_argument, 0, 0},
+        {"configure-using",         required_argument, 0, 0},
         {"install-using",           required_argument, 0, 0},
         {"make",                    required_argument, 0, 0},
         {"max-jobs",                required_argument, 0, 0},
@@ -157,6 +158,9 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
     } else if (strcmp("configure-prefix", name) == 0) {
         strcat(settings->config_options, " --prefix=");
         strcat(settings->config_options, value);
+    } else if (strcmp("configure-using", name) == 0) {
+        strcat(settings->configure_commands, value);
+        strcat(settings->configure_commands, "\n");
     } else if (strcmp("install-using", name) == 0) {
         strcat(settings->install_commands, value);
         strcat(settings->install_commands, "\n");
