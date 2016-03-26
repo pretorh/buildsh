@@ -1,4 +1,4 @@
-. tests/setup.sh
+. "$(dirname $0)/../setup.sh"
 
 ./buildsh name --config-env ABC=123 > $LOG
 

@@ -1,4 +1,4 @@
-. tests/setup.sh
+. "$(dirname $0)/../setup.sh"
 
 ./buildsh name --source-setup "echo hello" > $LOG
 

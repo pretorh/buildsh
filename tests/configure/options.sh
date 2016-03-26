@@ -1,4 +1,4 @@
-. tests/setup.sh
+. "$(dirname $0)/../setup.sh"
 
 ./buildsh name --config-opt "option 1" --config-opt A=B --config-val X > $LOG
 
