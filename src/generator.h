@@ -21,6 +21,7 @@ struct Settings {
     char test_commands[8192];
     char install_commands[8192];
     char install_post[8192];
+    char cleanup_commands[8192];
 
     // default action options
     char config_dir[PATH_MAX + 1];
@@ -36,7 +37,6 @@ struct Settings {
 
 void extract(const char *archive, const char *name);
 void make_build_dir();
-void cleanup(const char *dir_name, int nested_dir);
 int run(const char *commands);
 
 void generator_init(struct Settings *settings);

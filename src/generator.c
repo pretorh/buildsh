@@ -15,12 +15,6 @@ void make_build_dir() {
     EMPTY_LINE
 }
 
-void cleanup(const char *dir_name, int nested_dir) {
-    printf("cd ../%s\n", nested_dir ? "../" : "");
-    printf("rm -rf %s\n", dir_name);
-    EMPTY_LINE
-}
-
 int run(const char *commands) {
     if (*commands == 0)
         return 0;
@@ -55,4 +49,9 @@ void generator_finalize_setup(struct Settings *settings) {
     APPLY_DEFAULT(settings->test_commands,
         "make check --jobs %d\n",
         settings->max_make_jobs);
+    APPLY_DEFAULT(settings->cleanup_commands,
+        "cd %s\n"
+        "rm -rf %s\n",
+        settings->build_outside_sources ? "../.." : "..",
+        settings->name);
 }

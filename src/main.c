@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
         run(settings.test_commands);
     run(settings.install_commands);
     run(settings.install_post);
-    cleanup(settings.name, settings.build_outside_sources);
+    run(settings.cleanup_commands);
 
     return 0;
 }
