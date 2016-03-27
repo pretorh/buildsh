@@ -43,18 +43,26 @@ void generator_finalize_setup(struct Settings *settings) {
 
     if (settings->build_outside_sources)
         generator_create_build_dir(settings->source_setup);
-    APPLY_DEFAULT(settings->configure_commands,
-        "%s%s/configure%s\n",
-        settings->config_env, settings->config_dir, settings->config_options);
-    APPLY_DEFAULT(settings->build_commands,
-        "make --jobs %d %s\n",
-        settings->max_make_jobs, settings->make_options);
+
+    if (settings->do_configure)
+        APPLY_DEFAULT(settings->configure_commands,
+            "%s%s/configure%s\n",
+            settings->config_env, settings->config_dir, settings->config_options);
+
+    if (settings->do_build)
+        APPLY_DEFAULT(settings->build_commands,
+            "make --jobs %d %s\n",
+            settings->max_make_jobs, settings->make_options);
+
+    if (settings->do_test)
+        APPLY_DEFAULT(settings->test_commands,
+            "make check --jobs %d\n",
+            settings->max_make_jobs);
+
     APPLY_DEFAULT(settings->install_commands,
         "%s\n",
         "make install");
-    APPLY_DEFAULT(settings->test_commands,
-        "make check --jobs %d\n",
-        settings->max_make_jobs);
+
     APPLY_DEFAULT(settings->cleanup_commands,
         "cd %s\n"
         "rm -rf %s\n",

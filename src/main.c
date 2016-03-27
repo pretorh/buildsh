@@ -15,14 +15,9 @@ int main(int argc, char *argv[]) {
 
     extract(settings.archive, settings.name);
     run(settings.source_setup);
-
-    if (settings.do_configure)
-        run(settings.configure_commands);
-
-    if (settings.do_build)
-        run(settings.build_commands);
-    if (settings.do_test)
-        run(settings.test_commands);
+    run(settings.configure_commands);
+    run(settings.build_commands);
+    run(settings.test_commands);
     run(settings.install_commands);
     run(settings.install_post);
     run(settings.cleanup_commands);
