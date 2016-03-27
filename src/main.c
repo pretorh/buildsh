@@ -15,8 +15,6 @@ int main(int argc, char *argv[]) {
 
     extract(settings.archive, settings.name);
     run(settings.source_setup);
-    if (settings.build_outside_sources)
-        make_build_dir();
 
     if (settings.do_configure)
         run(settings.configure_commands);

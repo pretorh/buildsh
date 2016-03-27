@@ -9,18 +9,22 @@ void extract(const char *archive, const char *name) {
     EMPTY_LINE
 }
 
-void make_build_dir() {
-    printf("mkdir build\n");
-    printf("cd build\n");
-    EMPTY_LINE
-}
-
 int run(const char *commands) {
     if (*commands == 0)
         return 0;
     printf("%s\n", commands);
     return 1;
 }
+
+// helper generator functions
+
+void generator_create_build_dir(char *commands) {
+    strcat(commands,
+        "mkdir build\n"
+        "cd build\n");
+}
+
+// public generator functions
 
 void generator_init(struct Settings *settings) {
     memset(settings, 0, sizeof(*settings));
@@ -37,6 +41,8 @@ void generator_finalize_setup(struct Settings *settings) {
         "%s",
         ".");
 
+    if (settings->build_outside_sources)
+        generator_create_build_dir(settings->source_setup);
     APPLY_DEFAULT(settings->configure_commands,
         "%s%s/configure%s\n",
         settings->config_env, settings->config_dir, settings->config_options);
