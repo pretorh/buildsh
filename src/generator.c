@@ -3,12 +3,6 @@
 
 #define EMPTY_LINE puts("");
 
-void extract(const char *archive, const char *name) {
-    printf("tar xf %s\n", archive);
-    printf("cd %s\n", name);
-    EMPTY_LINE
-}
-
 int run(const char *commands) {
     if (*commands == 0)
         return 0;
@@ -20,8 +14,20 @@ int run(const char *commands) {
 
 void generator_create_build_dir(char *commands) {
     strcat(commands,
+        "\n"
         "mkdir build\n"
         "cd build\n");
+}
+
+void generator_extract_source(struct Settings *settings) {
+    char current[8192];
+    strcpy(current, settings->source_setup);
+
+    sprintf(settings->source_setup,
+        "tar xf %s\n"
+        "cd %s\n"
+        "%s",
+        settings->archive, settings->name, current);
 }
 
 // public generator functions
@@ -40,6 +46,8 @@ void generator_finalize_setup(struct Settings *settings) {
     APPLY_DEFAULT(settings->config_dir,
         "%s",
         ".");
+
+    generator_extract_source(settings);
 
     if (settings->build_outside_sources)
         generator_create_build_dir(settings->source_setup);

@@ -36,7 +36,6 @@ struct Settings {
     int do_test;
 };
 
-void extract(const char *archive, const char *name);
 int run(const char *commands);
 
 void generator_init(struct Settings *settings);

@@ -13,7 +13,6 @@ int main(int argc, char *argv[]) {
     struct Settings settings;
     parse_settings(argc, argv, &settings);
 
-    extract(settings.archive, settings.name);
     run(settings.source_setup);
     run(settings.configure_commands);
     run(settings.build_commands);
