@@ -3,33 +3,6 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <string.h>
-#include <limits.h>
-
-#define APPLY_DEFAULT(field, format, ...) \
-    if (*field == 0) \
-        sprintf(field, format, __VA_ARGS__);
-
-struct Settings {
-    const char *name;
-    char archive[PATH_MAX + 1];
-
-    char source_setup[8192];
-    char config_dir[PATH_MAX + 1];
-    char config_env[8192];
-    char config_options[8192];
-    char make_options[8192];
-    char configure_commands[8192];
-    char build_commands[8192];
-    char test_commands[8192];
-    char install_commands[8192];
-    char install_post[8192];
-
-    int build_outside_sources;
-    int max_make_jobs;
-    int do_configure;
-    int do_build;
-    int do_test;
-};
 
 void parse_settings(int argc, char *argv[], struct Settings *settings);
 void parse_arguments(int argc, char *argv[], struct Settings *settings);

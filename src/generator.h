@@ -1,6 +1,38 @@
 #ifndef _GENERATOR_H_
 #define _GENERATOR_H_
 
+#include <limits.h>
+
+#define APPLY_DEFAULT(field, format, ...) \
+    if (*field == 0) \
+        sprintf(field, format, __VA_ARGS__);
+
+struct Settings {
+    const char *name;
+    char archive[PATH_MAX + 1];
+    int build_outside_sources;
+    int max_make_jobs;
+
+    // commands
+    char source_setup[8192];
+    char configure_commands[8192];
+    char build_commands[8192];
+    char test_commands[8192];
+    char install_commands[8192];
+    char install_post[8192];
+
+    // default action options
+    char config_dir[PATH_MAX + 1];
+    char config_env[8192];
+    char config_options[8192];
+    char make_options[8192];
+
+    // actions
+    int do_configure;
+    int do_build;
+    int do_test;
+};
+
 void extract(const char *archive, const char *name);
 void make_build_dir();
 void cleanup(const char *dir_name, int nested_dir);
