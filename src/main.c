@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
-#include <string.h>
 
 void parse_settings(int argc, char *argv[], struct Settings *settings);
 void parse_arguments(int argc, char *argv[], struct Settings *settings);
@@ -34,24 +33,12 @@ int main(int argc, char *argv[]) {
 }
 
 void parse_settings(int argc, char *argv[], struct Settings *settings) {
-    memset(settings, 0, sizeof(*settings));
-    settings->max_make_jobs = 4;
-    settings->do_configure = 1;
-    settings->do_build = 1;
+    generator_init(settings);
 
     parse_arguments(argc, argv, settings);
     parse_name_from_remaining(argc, argv, settings);
 
-    APPLY_DEFAULT(settings->archive, "%s.tar.*", settings->name);
-    APPLY_DEFAULT(settings->config_dir, "%s", ".");
-    APPLY_DEFAULT(settings->configure_commands, "%s%s/configure%s\n",
-        settings->config_env, settings->config_dir, settings->config_options);
-    APPLY_DEFAULT(settings->build_commands, "make --jobs %d %s\n",
-        settings->max_make_jobs, settings->make_options);
-    APPLY_DEFAULT(settings->install_commands, "%s\n",
-        "make install");
-    APPLY_DEFAULT(settings->test_commands, "make check --jobs %d\n",
-        settings->max_make_jobs);
+    generator_finalize_setup(settings);
 }
 
 void parse_arguments(int argc, char *argv[], struct Settings *settings) {

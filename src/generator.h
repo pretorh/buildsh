@@ -2,6 +2,7 @@
 #define _GENERATOR_H_
 
 #include <limits.h>
+#include <string.h>
 
 #define APPLY_DEFAULT(field, format, ...) \
     if (*field == 0) \
@@ -37,5 +38,8 @@ void extract(const char *archive, const char *name);
 void make_build_dir();
 void cleanup(const char *dir_name, int nested_dir);
 int run(const char *commands);
+
+void generator_init(struct Settings *settings);
+void generator_finalize_setup(struct Settings *settings);
 
 #endif
