@@ -28,6 +28,7 @@ TESTS += tests/test/default-make-check.sh
 TESTS += tests/test/custom.sh
 
 TESTS += tests/install/default-make-install.sh
+TESTS += tests/install/sudo.sh
 TESTS += tests/install/custom.sh
 
 TESTS += tests/post/post-install.sh

@@ -53,6 +53,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"max-jobs",                required_argument, 0, 0},
         {"post",                    required_argument, 0, 0},
         {"source-setup",            required_argument, 0, 0},
+        {"sudo",                    no_argument      , &settings->install_sudo, 1},
         {"test",                    optional_argument, &settings->do_test, 1},
         {0, 0, 0, 0}
     };
