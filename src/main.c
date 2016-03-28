@@ -103,8 +103,7 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
         strcat(settings->build_commands, value);
         strcat(settings->build_commands, "\n");
     } else if (strcmp("destdir", name) == 0) {
-        strcat(settings->install_options, " DESTDIR=");
-        strcat(settings->install_options, value);
+        set_makeinstall_destdir(settings, value);
     } else if (strcmp("configure-dir", name) == 0) {
         strcpy(settings->config_dir, value);
     } else if (strcmp("configure-env", name) == 0) {
@@ -123,8 +122,7 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
         strcat(settings->configure_commands, value);
         strcat(settings->configure_commands, "\n");
     } else if (strcmp("install-using", name) == 0) {
-        strcat(settings->install_commands, value);
-        strcat(settings->install_commands, "\n");
+        add_install_command(settings, value);
     } else if (strcmp("make", name) == 0) {
         strcat(settings->make_options, " ");
         strcat(settings->make_options, value);

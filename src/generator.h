@@ -3,10 +3,16 @@
 
 #include <limits.h>
 #include <string.h>
+#include <stdio.h>
 
 #define APPLY_DEFAULT(field, format, ...) \
     if (*field == 0) \
         sprintf(field, format, __VA_ARGS__);
+#define eos(s) (s)+strlen(s)
+#define CONCAT_PRINTF(field, format, ...) \
+    sprintf(eos(field), format, __VA_ARGS__)
+#define CONCAT_LINE(field, line) \
+    CONCAT_PRINTF(field, "%s\n", line)
 
 struct Settings {
     const char *name;
@@ -41,5 +47,8 @@ int run(const char *commands);
 
 void generator_init(struct Settings *settings);
 void generator_finalize_setup(struct Settings *settings);
+
+void set_makeinstall_destdir(struct Settings *settings, const char *path);
+void add_install_command(struct Settings *settings, const char *command);
 
 #endif

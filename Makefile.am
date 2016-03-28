@@ -38,3 +38,4 @@ TESTS += tests/post/cleanup.sh
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra
 buildsh_SOURCES = src/main.c
 buildsh_SOURCES += src/generator.c src/generator.h
+buildsh_SOURCES += src/actions/install.c

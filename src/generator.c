@@ -1,5 +1,4 @@
 #include "generator.h"
-#include <stdio.h>
 
 #define EMPTY_LINE puts("");
 
