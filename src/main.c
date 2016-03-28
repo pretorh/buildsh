@@ -119,11 +119,9 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
     } else if (strcmp("max-jobs", name) == 0) {
         settings->max_make_jobs = atoi(value);
     } else if (strcmp("post", name) == 0) {
-        strcat(settings->install_post, value);
-        strcat(settings->install_post, "\n");
+        add_post_command(settings, value);
     } else if (strcmp("source-setup", name) == 0) {
-        strcat(settings->source_setup, value);
-        strcat(settings->source_setup, "\n");
+        add_source_setup_command(settings, value);
     } else {
         fprintf(stderr, "long option not implemented: %s\n", name);
         exit(EXIT_FAILURE);
