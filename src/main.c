@@ -99,8 +99,7 @@ void parse_flag_set(const char *name, const char *value, struct Settings *settin
 
 void parse_long_option(const char *name, const char *value, struct Settings *settings) {
     if (strcmp("build-using", name) == 0) {
-        strcat(settings->build_commands, value);
-        strcat(settings->build_commands, "\n");
+        add_build_command(settings, value);
     } else if (strcmp("destdir", name) == 0) {
         set_makeinstall_destdir(settings, value);
     } else if (strcmp("configure-dir", name) == 0) {
@@ -116,8 +115,7 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
     } else if (strcmp("install-using", name) == 0) {
         add_install_command(settings, value);
     } else if (strcmp("make", name) == 0) {
-        strcat(settings->make_options, " ");
-        strcat(settings->make_options, value);
+        add_make_option(settings, value);
     } else if (strcmp("max-jobs", name) == 0) {
         settings->max_make_jobs = atoi(value);
     } else if (strcmp("post", name) == 0) {
