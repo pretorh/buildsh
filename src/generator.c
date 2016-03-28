@@ -68,8 +68,9 @@ void generator_finalize_setup(struct Settings *settings) {
             settings->max_make_jobs);
 
     APPLY_DEFAULT(settings->install_commands,
-        "%smake install\n",
-        settings->install_sudo ? "sudo " : "");
+        "%smake%s install\n",
+        settings->install_sudo ? "sudo " : "",
+        settings->install_options);
 
     APPLY_DEFAULT(settings->cleanup_commands,
         "cd %s\n"

@@ -29,6 +29,7 @@ struct Settings {
     char config_options[8192];
     char make_options[8192];
     int install_sudo;
+    char install_options[8192];
 
     // actions
     int do_configure;
