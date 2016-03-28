@@ -48,6 +48,12 @@ int run(const char *commands);
 void generator_init(struct Settings *settings);
 void generator_finalize_setup(struct Settings *settings);
 
+void set_configure_dir(struct Settings *settings, const char *path);
+void add_configure_envvar(struct Settings *settings, const char *envvar);
+void add_configure_option(struct Settings *settings, const char *option);
+void add_configure_value(struct Settings *settings, const char *value);
+void add_configure_command(struct Settings *settings, const char *command);
+
 void set_makeinstall_destdir(struct Settings *settings, const char *path);
 void add_install_command(struct Settings *settings, const char *command);
 
