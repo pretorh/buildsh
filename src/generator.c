@@ -14,8 +14,8 @@ int run(const char *commands) {
 void generator_create_build_dir(char *commands) {
     strcat(commands,
         "\n"
-        "mkdir build\n"
-        "cd build\n");
+        "BUILD_DIR=$(mktemp -d ./buildsh-build-XXXXX)\n"
+        "cd $BUILD_DIR\n");
 }
 
 void generator_extract_source(struct Settings *settings) {
