@@ -1,8 +1,10 @@
 #include "generator.h"
+#include "config.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
 
+void print_version();
 void parse_settings(int argc, char *argv[], struct Settings *settings);
 void parse_env_var(struct Settings *settings);
 void parse_arguments(int argc, char *argv[], struct Settings *settings);
@@ -11,6 +13,11 @@ void parse_flag_set(const char *name, const char *value, struct Settings *settin
 void parse_long_option(const char *name, const char *value, struct Settings *settings);
 
 int main(int argc, char *argv[]) {
+    if (argc == 2 && (strcmp("--version", argv[1]) == 0 || strcmp("-v", argv[1]) == 0)) {
+        print_version();
+        exit(EXIT_SUCCESS);
+    }
+
     struct Settings settings;
     parse_settings(argc, argv, &settings);
 
@@ -23,6 +30,10 @@ int main(int argc, char *argv[]) {
     run(settings.cleanup_commands);
 
     return 0;
+}
+
+void print_version() {
+    printf("%s\n", PACKAGE_STRING);
 }
 
 void parse_settings(int argc, char *argv[], struct Settings *settings) {
