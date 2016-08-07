@@ -4,6 +4,7 @@
 #include <getopt.h>
 
 void parse_settings(int argc, char *argv[], struct Settings *settings);
+void parse_env_var(struct Settings *settings);
 void parse_arguments(int argc, char *argv[], struct Settings *settings);
 void parse_name_from_remaining(int argc, char *argv[], struct Settings *settings);
 void parse_flag_set(const char *name, const char *value, struct Settings *settings);
@@ -27,10 +28,18 @@ int main(int argc, char *argv[]) {
 void parse_settings(int argc, char *argv[], struct Settings *settings) {
     generator_init(settings);
 
+    parse_env_var(settings);
     parse_arguments(argc, argv, settings);
     parse_name_from_remaining(argc, argv, settings);
 
     generator_finalize_setup(settings);
+}
+
+void parse_env_var(struct Settings *settings) {
+    char *value;
+
+    if ((value = getenv("DESTDIR")))
+        set_makeinstall_destdir(settings, value);
 }
 
 void parse_arguments(int argc, char *argv[], struct Settings *settings) {
@@ -39,7 +48,6 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"archive",                 required_argument, 0, 'a'},
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
         {"build-using",             required_argument, 0, 0},
-        {"destdir",                 required_argument, 0, 0},
         {"no-build",                no_argument     , &settings->do_build, 0},
         {"no-configure",            no_argument     , &settings->do_configure, 0},
         {"configure-dir",           required_argument, 0, 0},
@@ -100,8 +108,6 @@ void parse_flag_set(const char *name, const char *value, struct Settings *settin
 void parse_long_option(const char *name, const char *value, struct Settings *settings) {
     if (strcmp("build-using", name) == 0) {
         add_build_command(settings, value);
-    } else if (strcmp("destdir", name) == 0) {
-        set_makeinstall_destdir(settings, value);
     } else if (strcmp("configure-dir", name) == 0) {
         set_configure_dir(settings, value);
     } else if (strcmp("configure-env", name) == 0) {
