@@ -9,7 +9,7 @@ void add_configure_envvar(struct Settings *settings, const char *envvar) {
 }
 
 void add_configure_option(struct Settings *settings, const char *option) {
-    CONCAT_PRINTF(settings->config_options, " --%s", option);
+    CONCAT_PRINTF(settings->config_options, " \\\n  --%s", option);
 }
 
 void add_configure_value(struct Settings *settings, const char *value) {
