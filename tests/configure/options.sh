@@ -4,4 +4,5 @@
 
 has_output "^\./configure.*"
 has_output ".*--option 1.*"
-has_output ".*--A=B X.*"
+has_output ".*--A=B"
+has_output ".*X.*"

@@ -13,7 +13,7 @@ void add_configure_option(struct Settings *settings, const char *option) {
 }
 
 void add_configure_value(struct Settings *settings, const char *value) {
-    CONCAT_PRINTF(settings->config_options, " %s", value);
+    CONCAT_PRINTF(settings->config_options, " \\\n  %s", value);
 }
 
 void add_configure_command(struct Settings *settings, const char *command) {
