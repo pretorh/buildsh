@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
 . "$(dirname "$0")/../setup.sh"
 
 ./buildsh name --archive Name.tar.xz > "$LOG"

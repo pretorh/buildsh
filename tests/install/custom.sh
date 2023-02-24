@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
 . "$(dirname "$0")/../setup.sh"
 
 ./buildsh name --install-using "echo install1" --install-using "echo install2" > "$LOG"

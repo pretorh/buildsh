@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
 . "$(dirname "$0")/../setup.sh"
 
 ./buildsh name --configure "option 1" --configure A=B --configure-val X > "$LOG"
