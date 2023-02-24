@@ -1,5 +1,5 @@
-. "$(dirname $0)/../setup.sh"
+. "$(dirname "$0")/../setup.sh"
 
-./buildsh name --no-configure > $LOG
+./buildsh name --no-configure > "$LOG"
 
 not_has_output "configure"

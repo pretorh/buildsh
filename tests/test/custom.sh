@@ -1,6 +1,6 @@
-. "$(dirname $0)/../setup.sh"
+. "$(dirname "$0")/../setup.sh"
 
-./buildsh name --test="echo abc" --test="echo def" > $LOG
+./buildsh name --test="echo abc" --test="echo def" > "$LOG"
 
 not_has_output "make check"
 has_output "echo abc"

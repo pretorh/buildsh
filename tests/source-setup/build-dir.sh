@@ -1,6 +1,6 @@
-. "$(dirname $0)/../setup.sh"
+. "$(dirname "$0")/../setup.sh"
 
-./buildsh name --build-outside-sources > $LOG
+./buildsh name --build-outside-sources > "$LOG"
 
 has_output "BUILD_DIR=\$(mktemp -d ./buildsh-build-XXXXX)"
 has_output "cd \$BUILD_DIR"
