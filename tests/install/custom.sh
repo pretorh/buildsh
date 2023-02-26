@@ -1,6 +1,9 @@
-. "$(dirname $0)/../setup.sh"
+#!/usr/bin/env bash
+set -e
 
-./buildsh name --install-using "echo install1" --install-using "echo install2" > $LOG
+. "$(dirname "$0")/../setup.sh"
+
+./buildsh name --install-using "echo install1" --install-using "echo install2" > "$LOG"
 
 not_has_output "make install"
 has_output "echo install1"

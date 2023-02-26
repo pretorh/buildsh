@@ -1,5 +1,8 @@
-. "$(dirname $0)/../setup.sh"
+#!/usr/bin/env bash
+set -e
 
-./buildsh name --configure-dir abc > $LOG
+. "$(dirname "$0")/../setup.sh"
+
+./buildsh name --configure-dir abc > "$LOG"
 
 has_output "^abc/configure$"

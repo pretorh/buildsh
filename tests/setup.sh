@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
 LOG=$(mktemp /tmp/buildsh-XXXXXX)
 ERRORS=0
 
@@ -5,11 +8,11 @@ trap 'trap_err ${LINENO}' ERR
 trap trap_finalize EXIT
 
 function has_output {
-    cat $LOG | grep -q "$1" || error "output not found: $1"
+    grep -q "$1" "$LOG" || error "output not found: $1"
 }
 
 function not_has_output {
-    if cat $LOG | grep -q "$1" ; then
+    if grep -q "$1" "$LOG" ; then
         error "output found: $1"
     fi
 }
@@ -28,7 +31,7 @@ function trap_finalize {
         exit 0
     else
         echo "$ERRORS errors"
-        cat $LOG
+        cat "$LOG"
         exit 1
     fi
 }

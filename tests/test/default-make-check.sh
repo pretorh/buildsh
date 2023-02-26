@@ -1,6 +1,9 @@
-. "$(dirname $0)/../setup.sh"
+#!/usr/bin/env bash
+set -e
 
-./buildsh name --test > $LOG
+. "$(dirname "$0")/../setup.sh"
+
+./buildsh name --test > "$LOG"
 
 has_output "make check"
 # paralel

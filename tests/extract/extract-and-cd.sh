@@ -1,6 +1,9 @@
-. "$(dirname $0)/../setup.sh"
+#!/usr/bin/env bash
+set -e
 
-./buildsh name > $LOG
+. "$(dirname "$0")/../setup.sh"
+
+./buildsh name > "$LOG"
 
 has_output "tar xf name.tar.*"
 has_output "cd name"

@@ -1,5 +1,8 @@
-. "$(dirname $0)/../setup.sh"
+#!/usr/bin/env bash
+set -e
 
-./buildsh name --make abc --make def > $LOG
+. "$(dirname "$0")/../setup.sh"
+
+./buildsh name --make abc --make def > "$LOG"
 
 has_output "^make --jobs .* abc def"
