@@ -21,6 +21,7 @@ DESTDIR=".." make install
 cd ..
 rm -rf $name
 echo ""
+./buildsh --version
 
 echo "you can now use ./buildsh to build buildsh from the tar archive, ex:"
 echo "  ./buildsh $name --configure prefix=/usr --test | bash -e"
