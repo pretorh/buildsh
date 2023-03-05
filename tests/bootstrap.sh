@@ -10,11 +10,10 @@ echo "running $bootstrap for test" >&2
 (
   cd "$test_dir"
   $bootstrap
-) >> "$LOG" || error "bootstrap script failed"
+) >> "$LOG" 2>&1 || error "bootstrap script failed"
 
 test -x "$test_dir"/buildsh || error "buildsh not created in $test_dir"
-test -f "$test_dir/bootstrap.log" || error "bootstrap log file not created"
-if [ "$(find "$test_dir" | wc -l)" -ne 4 ] ; then
+if [ "$(find "$test_dir" | wc -l)" -ne 3 ] ; then
   ls -1 "$test_dir" "" >> "$LOG"
   error "unexpected files in $test_dir after buildsh created"
 fi
