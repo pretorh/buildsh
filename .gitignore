@@ -25,3 +25,6 @@ src/**/.dirstamp
 tests/**/*.log
 tests/**/*.trs
 test-suite.log
+
+# other output files
+*.log
