@@ -16,6 +16,14 @@ This is pretty easy. But doing it 20+ times (like installing a whole system from
 buildsh <file> --configure [option 1] --configure [option 2] ... | sh -e
 ```
 
+## installing
+
+```
+curl https://raw.githubusercontent.com/pretorh/buildsh/master/bootstrap.sh | bash
+```
+
+and then use commands as described in the output
+
 ## CLI parameters
 
 The parameters are still changing. See the tests for sample usage
