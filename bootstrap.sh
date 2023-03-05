@@ -5,6 +5,11 @@ version=0.0.1
 name=buildsh-$version
 tar=$name.tar.gz
 
+if [ ! -f $tar ] ; then
+  echo "downloading $tar"
+  curl https://github.com/pretorh/buildsh/releases/download/v$version/$tar --output $tar
+fi
+
 rm -vf ./buildsh
 echo "building ./buildsh from $tar"
 (
