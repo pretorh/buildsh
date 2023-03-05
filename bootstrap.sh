@@ -7,7 +7,7 @@ tar=$name.tar.gz
 
 if [ ! -f $tar ] ; then
   echo "downloading $tar"
-  curl https://github.com/pretorh/buildsh/releases/download/v$version/$tar --output $tar
+  curl -L https://github.com/pretorh/buildsh/releases/download/v$version/$tar --output $tar
 fi
 
 rm -vf ./buildsh
