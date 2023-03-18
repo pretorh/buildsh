@@ -43,6 +43,7 @@ TESTS += tests/post/from-file-error-handling.sh
 
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra
 buildsh_SOURCES = src/main.c
+buildsh_SOURCES += src/utils.c
 buildsh_SOURCES += src/generator.c src/generator.h
 buildsh_SOURCES += src/actions/source-setup.c
 buildsh_SOURCES += src/actions/configure.c

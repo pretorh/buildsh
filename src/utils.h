@@ -11,4 +11,6 @@
     fprintf(stderr, format); \
     exit(EXIT_FAILURE);
 
+void concat_formatted_string(char *into, int length, const char *format, ...);
+
 #endif
