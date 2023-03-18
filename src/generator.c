@@ -40,7 +40,7 @@ void generator_extract_source(struct Settings *settings) {
     char current[MAX_COMMAND_LENGTH];
     strcpy(current, settings->source_setup);
 
-    sprintf(settings->source_setup,
+    concat_formatted_string(settings->source_setup, MAX_COMMAND_LENGTH,
         "tar xf %s\n"
         "cd %s\n"
         "%s",
