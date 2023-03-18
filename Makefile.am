@@ -27,6 +27,7 @@ TESTS += tests/build/from-file.sh
 TESTS += tests/test/default-off.sh
 TESTS += tests/test/default-make-check.sh
 TESTS += tests/test/custom.sh
+TESTS += tests/test/from-file.sh
 
 TESTS += tests/install/default-make-install.sh
 TESTS += tests/install/destdir.sh
