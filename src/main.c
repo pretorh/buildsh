@@ -138,11 +138,11 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
     } else if (strcmp("configure-using", name) == 0) {
         add_configure_command(settings, value);
     } else if (strcmp("configure-file", name) == 0) {
-        concat_file(settings->configure_commands, value);
+        add_configure_file(settings, value);
     } else if (strcmp("install-using", name) == 0) {
         add_install_command(settings, value);
     } else if (strcmp("install-file", name) == 0) {
-        concat_file(settings->install_commands, value);
+        add_install_file(settings, value);
     } else if (strcmp("make", name) == 0) {
         add_make_option(settings, value);
     } else if (strcmp("max-jobs", name) == 0) {
@@ -150,7 +150,7 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
     } else if (strcmp("post", name) == 0) {
         add_post_command(settings, value);
     } else if (strcmp("post-file", name) == 0) {
-        concat_file(settings->install_post, value);
+        add_post_file(settings, value);
     } else if (strcmp("source-setup", name) == 0) {
         add_source_setup_command(settings, value);
     } else if (strcmp("source-setup-file", name) == 0) {
