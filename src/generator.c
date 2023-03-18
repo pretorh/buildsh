@@ -10,7 +10,7 @@ int run(const char *commands) {
     return 1;
 }
 
-void concat_file(const char *destination, const char *file) {
+void concat_file(char *destination, const char *file) {
     FILE *fp = fopen(file, "r");
     if (fp == 0) {
         fprintf(stderr, "error reading file %s\n", file);

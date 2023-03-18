@@ -44,7 +44,7 @@ struct Settings {
 };
 
 int run(const char *commands);
-void concat_file(const char *buffer, const char *file);
+void concat_file(char *buffer, const char *file);
 
 void generator_init(struct Settings *settings);
 void generator_finalize_setup(struct Settings *settings);
