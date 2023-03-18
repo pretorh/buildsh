@@ -17,11 +17,11 @@ void concat_file(char *destination, const char *file) {
         exit(EXIT_FAILURE);
     }
 
-    char buffer[8192];
-    int size = fread(buffer, sizeof(char), 8192, fp);
+    char buffer[MAX_COMMAND_LENGTH];
+    int size = fread(buffer, sizeof(char), MAX_COMMAND_LENGTH, fp);
     fclose(fp);
 
-    if (size == 8192) {
+    if (size == MAX_COMMAND_LENGTH) {
         fprintf(stderr, "file %s too large\n", file);
         exit(EXIT_FAILURE);
     }
@@ -39,7 +39,7 @@ void generator_create_build_dir(char *commands) {
 }
 
 void generator_extract_source(struct Settings *settings) {
-    char current[8192];
+    char current[MAX_COMMAND_LENGTH];
     strcpy(current, settings->source_setup);
 
     sprintf(settings->source_setup,
