@@ -1,4 +1,5 @@
 #include "../generator.h"
+#include "../utils.h"
 
 void set_makeinstall_destdir(struct Settings *settings, const char *path) {
     CONCAT_PRINTF(settings->install_options, " DESTDIR=%s", path);

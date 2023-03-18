@@ -1,5 +1,5 @@
 #include "generator.h"
-#include <stdlib.h>
+#include "utils.h"
 
 #define EMPTY_LINE puts("");
 
@@ -10,20 +10,18 @@ int run(const char *commands) {
     return 1;
 }
 
-void concat_file(const char *destination, const char *file) {
+void concat_file(char *destination, const char *file) {
     FILE *fp = fopen(file, "r");
     if (fp == 0) {
-        fprintf(stderr, "error reading file %s\n", file);
-        exit(EXIT_FAILURE);
+        exit_failure_printf("error reading file %s\n", file);
     }
 
-    char buffer[8192];
-    int size = fread(buffer, sizeof(char), 8192, fp);
+    char buffer[MAX_COMMAND_LENGTH];
+    int size = fread(buffer, sizeof(char), MAX_COMMAND_LENGTH, fp);
     fclose(fp);
 
-    if (size == 8192) {
-        fprintf(stderr, "file %s too large\n", file);
-        exit(EXIT_FAILURE);
+    if (size == MAX_COMMAND_LENGTH) {
+        exit_failure_printf("file %s too large\n", file);
     }
 
     CONCAT_LINE(destination, buffer);
@@ -39,10 +37,11 @@ void generator_create_build_dir(char *commands) {
 }
 
 void generator_extract_source(struct Settings *settings) {
-    char current[8192];
+    char current[MAX_COMMAND_LENGTH];
     strcpy(current, settings->source_setup);
 
-    sprintf(settings->source_setup,
+    settings->source_setup[0] = 0;
+    concat_formatted_string(settings->source_setup, MAX_COMMAND_LENGTH,
         "tar xf %s\n"
         "cd %s\n"
         "%s",

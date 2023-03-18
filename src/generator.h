@@ -1,16 +1,17 @@
 #ifndef _GENERATOR_H_
 #define _GENERATOR_H_
 
-#include <limits.h>
+#include <linux/limits.h>
 #include <string.h>
 #include <stdio.h>
 
+#define MAX_COMMAND_LENGTH 8192
+
 #define APPLY_DEFAULT(field, format, ...) \
     if (*field == 0) \
-        sprintf(field, format, __VA_ARGS__);
-#define eos(s) (s)+strlen(s)
+        concat_formatted_string(field, MAX_COMMAND_LENGTH, format, __VA_ARGS__);
 #define CONCAT_PRINTF(field, format, ...) \
-    sprintf(eos(field), format, __VA_ARGS__)
+    concat_formatted_string(field, MAX_COMMAND_LENGTH, format, __VA_ARGS__)
 #define CONCAT_LINE(field, line) \
     CONCAT_PRINTF(field, "%s\n", line)
 
@@ -21,21 +22,21 @@ struct Settings {
     int max_make_jobs;
 
     // commands
-    char source_setup[8192];
-    char configure_commands[8192];
-    char build_commands[8192];
-    char test_commands[8192];
-    char install_commands[8192];
-    char install_post[8192];
-    char cleanup_commands[8192];
+    char source_setup[MAX_COMMAND_LENGTH];
+    char configure_commands[MAX_COMMAND_LENGTH];
+    char build_commands[MAX_COMMAND_LENGTH];
+    char test_commands[MAX_COMMAND_LENGTH];
+    char install_commands[MAX_COMMAND_LENGTH];
+    char install_post[MAX_COMMAND_LENGTH];
+    char cleanup_commands[MAX_COMMAND_LENGTH];
 
     // default action options
     char config_dir[PATH_MAX + 1];
-    char config_env[8192];
-    char config_options[8192];
-    char make_options[8192];
+    char config_env[MAX_COMMAND_LENGTH];
+    char config_options[MAX_COMMAND_LENGTH];
+    char make_options[MAX_COMMAND_LENGTH];
     int install_sudo;
-    char install_options[8192];
+    char install_options[MAX_COMMAND_LENGTH];
 
     // actions
     int do_configure;
@@ -44,7 +45,7 @@ struct Settings {
 };
 
 int run(const char *commands);
-void concat_file(const char *buffer, const char *file);
+void concat_file(char *buffer, const char *file);
 
 void generator_init(struct Settings *settings);
 void generator_finalize_setup(struct Settings *settings);

@@ -1,5 +1,5 @@
 bin_PROGRAMS = buildsh
-EXTRA_DIST = $(TESTS) tests/setup.sh
+EXTRA_DIST = src/utils.h $(TESTS) tests/setup.sh
 
 TESTS =
 
@@ -9,6 +9,7 @@ TESTS += tests/extract/custom-archive-name.sh
 TESTS += tests/source-setup/run-commands.sh
 TESTS += tests/source-setup/build-dir.sh
 TESTS += tests/source-setup/from-file.sh
+TESTS += tests/source-setup/overflow-errors.sh
 
 TESTS += tests/configure/default-configure.sh
 TESTS += tests/configure/disabled.sh
@@ -17,6 +18,7 @@ TESTS += tests/configure/in-custom-dir.sh
 TESTS += tests/configure/prefix-env.sh
 TESTS += tests/configure/custom-commands.sh
 TESTS += tests/configure/from-file.sh
+TESTS += tests/configure/overflow-errors.sh
 
 TESTS += tests/build/default-make.sh
 TESTS += tests/build/disabled.sh
@@ -43,6 +45,7 @@ TESTS += tests/post/from-file-error-handling.sh
 
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra
 buildsh_SOURCES = src/main.c
+buildsh_SOURCES += src/utils.c
 buildsh_SOURCES += src/generator.c src/generator.h
 buildsh_SOURCES += src/actions/source-setup.c
 buildsh_SOURCES += src/actions/configure.c

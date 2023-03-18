@@ -1,4 +1,5 @@
 #include "../generator.h"
+#include "../utils.h"
 
 void add_build_command(struct Settings *settings, const char *command) {
     CONCAT_LINE(settings->build_commands, command);
