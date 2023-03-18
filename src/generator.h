@@ -1,7 +1,7 @@
 #ifndef _GENERATOR_H_
 #define _GENERATOR_H_
 
-#include <limits.h>
+#include <linux/limits.h>
 #include <string.h>
 #include <stdio.h>
 
