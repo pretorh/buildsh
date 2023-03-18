@@ -59,6 +59,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"archive",                 required_argument, 0, 'a'},
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
         {"build-using",             required_argument, 0, 0},
+        {"build-file",              required_argument, 0, 0},
         {"no-build",                no_argument     , &settings->do_build, 0},
         {"no-configure",            no_argument     , &settings->do_configure, 0},
         {"configure-dir",           required_argument, 0, 0},
@@ -66,13 +67,18 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"configure",               required_argument, 0, 0},
         {"configure-val",           required_argument, 0, 0},
         {"configure-using",         required_argument, 0, 0},
+        {"configure-file",          required_argument, 0, 0},
         {"install-using",           required_argument, 0, 0},
+        {"install-file",            required_argument, 0, 0},
         {"make",                    required_argument, 0, 0},
         {"max-jobs",                required_argument, 0, 0},
         {"post",                    required_argument, 0, 0},
+        {"post-file",               required_argument, 0, 0},
         {"source-setup",            required_argument, 0, 0},
+        {"source-setup-file",       required_argument, 0, 0},
         {"sudo",                    no_argument      , &settings->install_sudo, 1},
         {"test",                    optional_argument, &settings->do_test, 1},
+        {"test-file",               required_argument, 0, 0},
         {0, 0, 0, 0}
     };
 
@@ -119,6 +125,8 @@ void parse_flag_set(const char *name, const char *value, struct Settings *settin
 void parse_long_option(const char *name, const char *value, struct Settings *settings) {
     if (strcmp("build-using", name) == 0) {
         add_build_command(settings, value);
+    } else if (strcmp("build-file", name) == 0) {
+        add_build_file(settings, value);
     } else if (strcmp("configure-dir", name) == 0) {
         set_configure_dir(settings, value);
     } else if (strcmp("configure-env", name) == 0) {
@@ -129,16 +137,26 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
         add_configure_value(settings, value);
     } else if (strcmp("configure-using", name) == 0) {
         add_configure_command(settings, value);
+    } else if (strcmp("configure-file", name) == 0) {
+        add_configure_file(settings, value);
     } else if (strcmp("install-using", name) == 0) {
         add_install_command(settings, value);
+    } else if (strcmp("install-file", name) == 0) {
+        add_install_file(settings, value);
     } else if (strcmp("make", name) == 0) {
         add_make_option(settings, value);
     } else if (strcmp("max-jobs", name) == 0) {
         settings->max_make_jobs = atoi(value);
     } else if (strcmp("post", name) == 0) {
         add_post_command(settings, value);
+    } else if (strcmp("post-file", name) == 0) {
+        add_post_file(settings, value);
     } else if (strcmp("source-setup", name) == 0) {
         add_source_setup_command(settings, value);
+    } else if (strcmp("source-setup-file", name) == 0) {
+        add_source_setup_file(settings, value);
+    } else if (strcmp("test-file", name) == 0 && value) {
+        concat_file(settings->test_commands, value);
     } else {
         fprintf(stderr, "long option not implemented: %s\n", name);
         exit(EXIT_FAILURE);

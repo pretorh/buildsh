@@ -44,24 +44,30 @@ struct Settings {
 };
 
 int run(const char *commands);
+void concat_file(const char *buffer, const char *file);
 
 void generator_init(struct Settings *settings);
 void generator_finalize_setup(struct Settings *settings);
 
 void add_source_setup_command(struct Settings *settings, const char *command);
+void add_source_setup_file(struct Settings *settings, const char *command);
 
 void set_configure_dir(struct Settings *settings, const char *path);
 void add_configure_envvar(struct Settings *settings, const char *envvar);
 void add_configure_option(struct Settings *settings, const char *option);
 void add_configure_value(struct Settings *settings, const char *value);
 void add_configure_command(struct Settings *settings, const char *command);
+void add_configure_file(struct Settings *settings, const char *file);
 
 void add_build_command(struct Settings *settings, const char *command);
 void add_make_option(struct Settings *settings, const char *option);
+void add_build_file(struct Settings *settings, const char *file);
 
 void set_makeinstall_destdir(struct Settings *settings, const char *path);
 void add_install_command(struct Settings *settings, const char *command);
+void add_install_file(struct Settings *settings, const char *file);
 
 void add_post_command(struct Settings *settings, const char *command);
+void add_post_file(struct Settings *settings, const char *file);
 
 #endif
