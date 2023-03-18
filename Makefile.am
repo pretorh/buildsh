@@ -39,6 +39,7 @@ TESTS += tests/install/from-file.sh
 TESTS += tests/post/post-install.sh
 TESTS += tests/post/cleanup.sh
 TESTS += tests/post/from-file.sh
+TESTS += tests/post/from-file-error-handling.sh
 
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra
 buildsh_SOURCES = src/main.c
