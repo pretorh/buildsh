@@ -1,5 +1,5 @@
 #include "generator.h"
-#include <stdlib.h>
+#include "utils.h"
 
 #define EMPTY_LINE puts("");
 
@@ -13,8 +13,7 @@ int run(const char *commands) {
 void concat_file(char *destination, const char *file) {
     FILE *fp = fopen(file, "r");
     if (fp == 0) {
-        fprintf(stderr, "error reading file %s\n", file);
-        exit(EXIT_FAILURE);
+        exit_failure_printf("error reading file %s\n", file);
     }
 
     char buffer[MAX_COMMAND_LENGTH];
@@ -22,8 +21,7 @@ void concat_file(char *destination, const char *file) {
     fclose(fp);
 
     if (size == MAX_COMMAND_LENGTH) {
-        fprintf(stderr, "file %s too large\n", file);
-        exit(EXIT_FAILURE);
+        exit_failure_printf("file %s too large\n", file);
     }
 
     CONCAT_LINE(destination, buffer);

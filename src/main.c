@@ -1,4 +1,5 @@
 #include "generator.h"
+#include "utils.h"
 #include "config.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -107,8 +108,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
 
 void parse_name_from_remaining(int argc, char *argv[], struct Settings *settings) {
     if (argc - optind != 1) {
-        fprintf(stderr, "Need exactly 1 non flag option\n");
-        exit(EXIT_FAILURE);
+        exit_failure_message("Need exactly 1 non flag option\n");
     }
     settings->name = argv[optind];
 }
@@ -158,7 +158,6 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
     } else if (strcmp("test-file", name) == 0 && value) {
         concat_file(settings->test_commands, value);
     } else {
-        fprintf(stderr, "long option not implemented: %s\n", name);
-        exit(EXIT_FAILURE);
+        exit_failure_printf("long option not implemented: %s\n", name);
     }
 }

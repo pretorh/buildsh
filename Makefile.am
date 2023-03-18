@@ -1,5 +1,5 @@
 bin_PROGRAMS = buildsh
-EXTRA_DIST = $(TESTS) tests/setup.sh
+EXTRA_DIST = src/utils.h $(TESTS) tests/setup.sh
 
 TESTS =
 
