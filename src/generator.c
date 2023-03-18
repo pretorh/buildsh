@@ -9,6 +9,20 @@ int run(const char *commands) {
     return 1;
 }
 
+void concat_file(const char *destination, const char *file) {
+    FILE *fp = fopen(file, "r");
+    if (fp == 0) {
+        return;
+    }
+
+    char buffer[8192];
+    fread(buffer, sizeof(char), 8192, fp);
+
+    CONCAT_LINE(destination, buffer);
+
+    fclose(fp);
+}
+
 // helper generator functions
 
 void generator_create_build_dir(char *commands) {
