@@ -60,6 +60,7 @@ void add_configure_command(struct Settings *settings, const char *command);
 
 void add_build_command(struct Settings *settings, const char *command);
 void add_make_option(struct Settings *settings, const char *option);
+void add_build_file(struct Settings *settings, const char *file);
 
 void set_makeinstall_destdir(struct Settings *settings, const char *path);
 void add_install_command(struct Settings *settings, const char *command);

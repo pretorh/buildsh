@@ -59,6 +59,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"archive",                 required_argument, 0, 'a'},
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
         {"build-using",             required_argument, 0, 0},
+        {"build-file",              required_argument, 0, 0},
         {"no-build",                no_argument     , &settings->do_build, 0},
         {"no-configure",            no_argument     , &settings->do_configure, 0},
         {"configure-dir",           required_argument, 0, 0},
@@ -120,6 +121,8 @@ void parse_flag_set(const char *name, const char *value, struct Settings *settin
 void parse_long_option(const char *name, const char *value, struct Settings *settings) {
     if (strcmp("build-using", name) == 0) {
         add_build_command(settings, value);
+    } else if (strcmp("build-file", name) == 0) {
+        add_build_file(settings, value);
     } else if (strcmp("configure-dir", name) == 0) {
         set_configure_dir(settings, value);
     } else if (strcmp("configure-env", name) == 0) {
