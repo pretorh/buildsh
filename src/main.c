@@ -67,10 +67,13 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"configure",               required_argument, 0, 0},
         {"configure-val",           required_argument, 0, 0},
         {"configure-using",         required_argument, 0, 0},
+        {"configure-file",          required_argument, 0, 0},
         {"install-using",           required_argument, 0, 0},
+        {"install-file",            required_argument, 0, 0},
         {"make",                    required_argument, 0, 0},
         {"max-jobs",                required_argument, 0, 0},
         {"post",                    required_argument, 0, 0},
+        {"post-file",               required_argument, 0, 0},
         {"source-setup",            required_argument, 0, 0},
         {"source-setup-file",       required_argument, 0, 0},
         {"sudo",                    no_argument      , &settings->install_sudo, 1},
@@ -134,14 +137,20 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
         add_configure_value(settings, value);
     } else if (strcmp("configure-using", name) == 0) {
         add_configure_command(settings, value);
+    } else if (strcmp("configure-file", name) == 0) {
+        concat_file(settings->configure_commands, value);
     } else if (strcmp("install-using", name) == 0) {
         add_install_command(settings, value);
+    } else if (strcmp("install-file", name) == 0) {
+        concat_file(settings->install_commands, value);
     } else if (strcmp("make", name) == 0) {
         add_make_option(settings, value);
     } else if (strcmp("max-jobs", name) == 0) {
         settings->max_make_jobs = atoi(value);
     } else if (strcmp("post", name) == 0) {
         add_post_command(settings, value);
+    } else if (strcmp("post-file", name) == 0) {
+        concat_file(settings->install_post, value);
     } else if (strcmp("source-setup", name) == 0) {
         add_source_setup_command(settings, value);
     } else if (strcmp("source-setup-file", name) == 0) {

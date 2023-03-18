@@ -16,6 +16,7 @@ TESTS += tests/configure/options.sh
 TESTS += tests/configure/in-custom-dir.sh
 TESTS += tests/configure/prefix-env.sh
 TESTS += tests/configure/custom-commands.sh
+TESTS += tests/configure/from-file.sh
 
 TESTS += tests/build/default-make.sh
 TESTS += tests/build/disabled.sh
@@ -33,9 +34,11 @@ TESTS += tests/install/default-make-install.sh
 TESTS += tests/install/destdir.sh
 TESTS += tests/install/sudo.sh
 TESTS += tests/install/custom.sh
+TESTS += tests/install/from-file.sh
 
 TESTS += tests/post/post-install.sh
 TESTS += tests/post/cleanup.sh
+TESTS += tests/post/from-file.sh
 
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra
 buildsh_SOURCES = src/main.c
