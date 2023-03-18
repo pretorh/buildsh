@@ -9,7 +9,7 @@ void concat_formatted_string(char *into, int length, const char *format, ...) {
     int remain = length - offset;
     int written = vsnprintf(into + offset, remain, format, args);
     if (written < 0 || written > remain) {
-        exit_failure_printf("overflow in string, %d", written);
+        exit_failure_printf("overflow in string (%d+%d >= %d)\n", offset, written, length);
     }
     va_end(args);
 }
