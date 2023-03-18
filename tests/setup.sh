@@ -9,6 +9,9 @@ trap trap_finalize EXIT
 
 function has_output {
     grep -q "$1" "$LOG" || error "output not found: $1"
+    if [ "$(grep --count "$1" "$LOG")" -gt 1 ] ; then
+      error "multiple matches found: $1"
+    fi
 }
 
 function not_has_output {
