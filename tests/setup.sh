@@ -22,6 +22,10 @@ function error {
     ERRORS=$((ERRORS + 1))
 }
 
+function create_temp_file {
+  mktemp /tmp/buildsh.tmp-XXXXXX
+}
+
 function trap_err {
     error "script error, exit with non-0"
 }

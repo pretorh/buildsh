@@ -8,6 +8,7 @@ TESTS += tests/extract/custom-archive-name.sh
 
 TESTS += tests/source-setup/run-commands.sh
 TESTS += tests/source-setup/build-dir.sh
+TESTS += tests/source-setup/from-file.sh
 
 TESTS += tests/configure/default-configure.sh
 TESTS += tests/configure/disabled.sh

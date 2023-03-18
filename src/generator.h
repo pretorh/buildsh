@@ -50,6 +50,7 @@ void generator_init(struct Settings *settings);
 void generator_finalize_setup(struct Settings *settings);
 
 void add_source_setup_command(struct Settings *settings, const char *command);
+void add_source_setup_file(struct Settings *settings, const char *command);
 
 void set_configure_dir(struct Settings *settings, const char *path);
 void add_configure_envvar(struct Settings *settings, const char *envvar);
