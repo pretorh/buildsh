@@ -1,4 +1,5 @@
 #include "../generator.h"
+#include "../utils.h"
 
 void set_configure_dir(struct Settings *settings, const char *path) {
     strcpy(settings->config_dir, path);

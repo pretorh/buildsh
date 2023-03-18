@@ -18,6 +18,7 @@ TESTS += tests/configure/in-custom-dir.sh
 TESTS += tests/configure/prefix-env.sh
 TESTS += tests/configure/custom-commands.sh
 TESTS += tests/configure/from-file.sh
+TESTS += tests/configure/errors.sh
 
 TESTS += tests/build/default-make.sh
 TESTS += tests/build/disabled.sh

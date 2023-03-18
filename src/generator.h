@@ -10,9 +10,8 @@
 #define APPLY_DEFAULT(field, format, ...) \
     if (*field == 0) \
         concat_formatted_string(field, MAX_COMMAND_LENGTH, format, __VA_ARGS__);
-#define eos(s) (s)+strlen(s)
 #define CONCAT_PRINTF(field, format, ...) \
-    sprintf(eos(field), format, __VA_ARGS__)
+    concat_formatted_string(field, MAX_COMMAND_LENGTH, format, __VA_ARGS__)
 #define CONCAT_LINE(field, line) \
     CONCAT_PRINTF(field, "%s\n", line)
 
