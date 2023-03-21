@@ -32,6 +32,7 @@ struct Settings {
 
     // default action options
     char config_dir[PATH_MAX + 1];
+    char config_script_name[PATH_MAX + 1];
     char config_env[MAX_COMMAND_LENGTH];
     char config_options[MAX_COMMAND_LENGTH];
     char make_options[MAX_COMMAND_LENGTH];
