@@ -55,6 +55,7 @@ void add_source_setup_command(struct Settings *settings, const char *command);
 void add_source_setup_file(struct Settings *settings, const char *command);
 
 void set_configure_dir(struct Settings *settings, const char *path);
+void set_configure_script_name(struct Settings *settings, const char *path);
 void add_configure_envvar(struct Settings *settings, const char *envvar);
 void add_configure_option(struct Settings *settings, const char *option);
 void add_configure_value(struct Settings *settings, const char *value);

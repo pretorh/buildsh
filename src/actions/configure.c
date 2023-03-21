@@ -5,6 +5,10 @@ void set_configure_dir(struct Settings *settings, const char *path) {
     strcpy(settings->config_dir, path);
 }
 
+void set_configure_script_name(struct Settings *settings, const char *path) {
+    strcpy(settings->config_script_name, path);
+}
+
 void add_configure_envvar(struct Settings *settings, const char *envvar) {
     CONCAT_PRINTF(settings->config_env, "%s ", envvar);
 }

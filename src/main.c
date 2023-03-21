@@ -64,6 +64,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"no-build",                no_argument     , &settings->do_build, 0},
         {"no-configure",            no_argument     , &settings->do_configure, 0},
         {"configure-dir",           required_argument, 0, 0},
+        {"configure-script-name",   required_argument, 0, 0},
         {"configure-env",           required_argument, 0, 0},
         {"configure",               required_argument, 0, 0},
         {"configure-val",           required_argument, 0, 0},
@@ -129,6 +130,8 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
         add_build_file(settings, value);
     } else if (strcmp("configure-dir", name) == 0) {
         set_configure_dir(settings, value);
+    } else if (strcmp("configure-script-name", name) == 0) {
+        set_configure_script_name(settings, value);
     } else if (strcmp("configure-env", name) == 0) {
         add_configure_envvar(settings, value);
     } else if (strcmp("configure", name) == 0) {
