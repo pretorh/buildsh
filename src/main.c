@@ -23,6 +23,7 @@ int main(int argc, char *argv[]) {
     parse_settings(argc, argv, &settings);
 
     run(settings.source_setup);
+    run(settings.build_dir_setup);
     run(settings.configure_commands);
     run(settings.build_commands);
     run(settings.test_commands);

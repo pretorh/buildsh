@@ -23,6 +23,7 @@ struct Settings {
 
     // commands
     char source_setup[MAX_COMMAND_LENGTH];
+    char build_dir_setup[MAX_COMMAND_LENGTH];
     char configure_commands[MAX_COMMAND_LENGTH];
     char build_commands[MAX_COMMAND_LENGTH];
     char test_commands[MAX_COMMAND_LENGTH];
