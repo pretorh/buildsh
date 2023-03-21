@@ -36,7 +36,6 @@ void generator_build_dir_setup(struct Settings *settings) {
     settings->build_dir_setup[0] = 0;
     concat_formatted_string(settings->build_dir_setup, MAX_COMMAND_LENGTH,
         "%s%s",
-        "\n"
         "BUILD_DIR=$(mktemp -d ./buildsh-build-XXXXX)\n"
         "cd $BUILD_DIR\n",
         current);
