@@ -50,8 +50,8 @@ void generator_extract_source(struct Settings *settings) {
 
 void generator_configure(struct Settings *settings) {
     APPLY_DEFAULT(settings->configure_commands,
-        "%s%s/configure%s\n",
-        settings->config_env, settings->config_dir, settings->config_options);
+        "%s%s/%s%s\n",
+        settings->config_env, settings->config_dir, settings->config_script_name, settings->config_options);
 }
 
 void generator_build(struct Settings *settings) {
@@ -97,6 +97,9 @@ void generator_finalize_setup(struct Settings *settings) {
     APPLY_DEFAULT(settings->config_dir,
         "%s",
         ".");
+    APPLY_DEFAULT(settings->config_script_name,
+        "%s",
+        "configure");
 
     generator_extract_source(settings);
 
