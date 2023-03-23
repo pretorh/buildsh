@@ -23,6 +23,7 @@ struct Settings {
 
     // commands
     char source_setup[MAX_COMMAND_LENGTH];
+    char build_dir_setup[MAX_COMMAND_LENGTH];
     char configure_commands[MAX_COMMAND_LENGTH];
     char build_commands[MAX_COMMAND_LENGTH];
     char test_commands[MAX_COMMAND_LENGTH];
@@ -53,6 +54,7 @@ void generator_finalize_setup(struct Settings *settings);
 
 void add_source_setup_command(struct Settings *settings, const char *command);
 void add_source_setup_file(struct Settings *settings, const char *command);
+void add_build_dir_setup_command(struct Settings *settings, const char *command);
 
 void set_configure_dir(struct Settings *settings, const char *path);
 void set_configure_script_name(struct Settings *settings, const char *path);

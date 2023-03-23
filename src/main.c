@@ -23,6 +23,7 @@ int main(int argc, char *argv[]) {
     parse_settings(argc, argv, &settings);
 
     run(settings.source_setup);
+    run(settings.build_dir_setup);
     run(settings.configure_commands);
     run(settings.build_commands);
     run(settings.test_commands);
@@ -59,6 +60,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
     struct option long_options[] = {
         {"archive",                 required_argument, 0, 'a'},
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
+        {"build-dir-setup",         required_argument, &settings->build_outside_sources, 1},
         {"build-using",             required_argument, 0, 0},
         {"build-file",              required_argument, 0, 0},
         {"no-build",                no_argument     , &settings->do_build, 0},
@@ -117,6 +119,9 @@ void parse_name_from_remaining(int argc, char *argv[], struct Settings *settings
 void parse_flag_set(const char *name, const char *value, struct Settings *settings) {
     if (strcmp("build-outside-sources", name) == 0 && *settings->config_dir == 0) {
         strcpy(settings->config_dir, "..");
+    } else if (strcmp("build-dir-setup", name) == 0) {
+        strcpy(settings->config_dir, "..");
+        add_build_dir_setup_command(settings, value);
     } else if (strcmp("test", name) == 0 && value) {
         strcat(settings->test_commands, value);
         strcat(settings->test_commands, "\n");

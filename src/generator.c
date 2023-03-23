@@ -29,11 +29,16 @@ void concat_file(char *destination, const char *file) {
 
 // helper generator functions
 
-void generator_create_build_dir(char *commands) {
-    strcat(commands,
-        "\n"
+void generator_build_dir_setup(struct Settings *settings) {
+    char current[MAX_COMMAND_LENGTH];
+    strcpy(current, settings->build_dir_setup);
+
+    settings->build_dir_setup[0] = 0;
+    concat_formatted_string(settings->build_dir_setup, MAX_COMMAND_LENGTH,
+        "%s%s",
         "BUILD_DIR=$(mktemp -d ./buildsh-build-XXXXX)\n"
-        "cd $BUILD_DIR\n");
+        "cd $BUILD_DIR\n",
+        current);
 }
 
 void generator_extract_source(struct Settings *settings) {
@@ -104,7 +109,7 @@ void generator_finalize_setup(struct Settings *settings) {
     generator_extract_source(settings);
 
     if (settings->build_outside_sources)
-        generator_create_build_dir(settings->source_setup);
+        generator_build_dir_setup(settings);
     if (settings->do_configure)
         generator_configure(settings);
     if (settings->do_build)
