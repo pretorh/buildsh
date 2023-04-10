@@ -95,6 +95,17 @@ void generator_init(struct Settings *settings) {
     settings->do_build = 1;
 }
 
+void generator_output_shell_commands(struct Settings *settings) {
+    run(settings->source_setup);
+    run(settings->build_dir_setup);
+    run(settings->configure_commands);
+    run(settings->build_commands);
+    run(settings->test_commands);
+    run(settings->install_commands);
+    run(settings->install_post);
+    run(settings->cleanup_commands);
+}
+
 void generator_finalize_setup(struct Settings *settings) {
     APPLY_DEFAULT(settings->archive,
         "%s.tar.*",

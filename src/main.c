@@ -22,15 +22,7 @@ int main(int argc, char *argv[]) {
     struct Settings settings;
     generator_init(&settings);
     parse_settings(argc, argv, &settings);
-
-    run(settings.source_setup);
-    run(settings.build_dir_setup);
-    run(settings.configure_commands);
-    run(settings.build_commands);
-    run(settings.test_commands);
-    run(settings.install_commands);
-    run(settings.install_post);
-    run(settings.cleanup_commands);
+    generator_output_shell_commands(&settings);
 
     return 0;
 }
