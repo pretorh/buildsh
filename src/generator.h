@@ -50,6 +50,7 @@ int run(const char *commands);
 void concat_file(char *buffer, const char *file);
 
 void generator_init(struct Settings *settings);
+void generator_output_shell_commands(struct Settings *settings);
 void generator_finalize_setup(struct Settings *settings);
 
 void add_source_setup_command(struct Settings *settings, const char *command);

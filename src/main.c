@@ -20,16 +20,10 @@ int main(int argc, char *argv[]) {
     }
 
     struct Settings settings;
+    generator_init(&settings);
     parse_settings(argc, argv, &settings);
-
-    run(settings.source_setup);
-    run(settings.build_dir_setup);
-    run(settings.configure_commands);
-    run(settings.build_commands);
-    run(settings.test_commands);
-    run(settings.install_commands);
-    run(settings.install_post);
-    run(settings.cleanup_commands);
+    generator_finalize_setup(&settings);
+    generator_output_shell_commands(&settings);
 
     return 0;
 }
@@ -39,13 +33,9 @@ void print_version() {
 }
 
 void parse_settings(int argc, char *argv[], struct Settings *settings) {
-    generator_init(settings);
-
     parse_env_var(settings);
     parse_arguments(argc, argv, settings);
     parse_name_from_remaining(argc, argv, settings);
-
-    generator_finalize_setup(settings);
 }
 
 void parse_env_var(struct Settings *settings) {
@@ -58,12 +48,14 @@ void parse_env_var(struct Settings *settings) {
 void parse_arguments(int argc, char *argv[], struct Settings *settings) {
     const char short_options[] = "";
     struct option long_options[] = {
+        // general
         {"archive",                 required_argument, 0, 'a'},
+        // source and build dir setup
         {"build-outside-sources",   no_argument      , &settings->build_outside_sources, 1},
         {"build-dir-setup",         required_argument, &settings->build_outside_sources, 1},
-        {"build-using",             required_argument, 0, 0},
-        {"build-file",              required_argument, 0, 0},
-        {"no-build",                no_argument     , &settings->do_build, 0},
+        {"source-setup",            required_argument, 0, 0},
+        {"source-setup-file",       required_argument, 0, 0},
+        // configure
         {"no-configure",            no_argument     , &settings->do_configure, 0},
         {"configure-dir",           required_argument, 0, 0},
         {"configure-script-name",   required_argument, 0, 0},
@@ -72,17 +64,23 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"configure-val",           required_argument, 0, 0},
         {"configure-using",         required_argument, 0, 0},
         {"configure-file",          required_argument, 0, 0},
-        {"install-using",           required_argument, 0, 0},
-        {"install-file",            required_argument, 0, 0},
+        // build
+        {"build-using",             required_argument, 0, 0},
+        {"build-file",              required_argument, 0, 0},
+        {"no-build",                no_argument     , &settings->do_build, 0},
         {"make",                    required_argument, 0, 0},
         {"max-jobs",                required_argument, 0, 0},
-        {"post",                    required_argument, 0, 0},
-        {"post-file",               required_argument, 0, 0},
-        {"source-setup",            required_argument, 0, 0},
-        {"source-setup-file",       required_argument, 0, 0},
-        {"sudo",                    no_argument      , &settings->install_sudo, 1},
+        // test
         {"test",                    optional_argument, &settings->do_test, 1},
         {"test-file",               required_argument, 0, 0},
+        // install
+        {"install-using",           required_argument, 0, 0},
+        {"install-file",            required_argument, 0, 0},
+        {"sudo",                    no_argument      , &settings->install_sudo, 1},
+        // post-install
+        {"post",                    required_argument, 0, 0},
+        {"post-file",               required_argument, 0, 0},
+        // cleanup
         {0, 0, 0, 0}
     };
 
