@@ -20,6 +20,7 @@ int main(int argc, char *argv[]) {
     }
 
     struct Settings settings;
+    generator_init(&settings);
     parse_settings(argc, argv, &settings);
 
     run(settings.source_setup);
@@ -39,8 +40,6 @@ void print_version() {
 }
 
 void parse_settings(int argc, char *argv[], struct Settings *settings) {
-    generator_init(settings);
-
     parse_env_var(settings);
     parse_arguments(argc, argv, settings);
     parse_name_from_remaining(argc, argv, settings);
