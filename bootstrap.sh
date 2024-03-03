@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-version=0.1.0
+version=0.2.1
 name=buildsh-$version
 tar=$name.tar.gz
 unset DESTDIR
