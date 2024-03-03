@@ -74,6 +74,7 @@ void parse_arguments(int argc, char *argv[], struct Settings *settings) {
         {"test",                    optional_argument, &settings->do_test, 1},
         {"test-file",               required_argument, 0, 0},
         // install
+        {"make-install",            required_argument, 0, 0},
         {"install-using",           required_argument, 0, 0},
         {"install-file",            required_argument, 0, 0},
         {"sudo",                    no_argument      , &settings->install_sudo, 1},
@@ -153,6 +154,8 @@ void parse_long_option(const char *name, const char *value, struct Settings *set
         add_make_option(settings, value);
     } else if (strcmp("max-jobs", name) == 0) {
         settings->max_make_jobs = atoi(value);
+    } else if (strcmp("make-install", name) == 0) {
+        add_makeinstall_option(settings, value);
     } else if (strcmp("post", name) == 0) {
         add_post_command(settings, value);
     } else if (strcmp("post-file", name) == 0) {
