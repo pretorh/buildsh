@@ -26,6 +26,7 @@ TESTS += tests/build/default-make.sh
 TESTS += tests/build/disabled.sh
 TESTS += tests/build/make-max-jobs.sh
 TESTS += tests/build/make-targets.sh
+TESTS += tests/build/make-vars.sh
 TESTS += tests/build/custom-commands.sh
 TESTS += tests/build/from-file.sh
 
