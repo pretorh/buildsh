@@ -70,6 +70,7 @@ void add_make_option(struct Settings *settings, const char *option);
 void add_build_file(struct Settings *settings, const char *file);
 
 void set_makeinstall_destdir(struct Settings *settings, const char *path);
+void add_makeinstall_option(struct Settings *settings, const char *option);
 void add_install_command(struct Settings *settings, const char *command);
 void add_install_file(struct Settings *settings, const char *file);
 
