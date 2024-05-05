@@ -1,5 +1,5 @@
 bin_PROGRAMS = buildsh
-EXTRA_DIST = src/utils.h $(TESTS) tests/setup.sh
+EXTRA_DIST = src/utils.h $(TESTS) tests/general/clear-from-file-buffers.expected.out tests/setup.sh
 
 TESTS =
 
@@ -46,6 +46,8 @@ TESTS += tests/post/post-install.sh
 TESTS += tests/post/cleanup.sh
 TESTS += tests/post/from-file.sh
 TESTS += tests/post/from-file-error-handling.sh
+
+TESTS += tests/general/clear-from-file-buffers.sh
 
 buildsh_CFLAGS = -ggdb -pedantic -Wall -Wextra
 buildsh_SOURCES = src/main.c

@@ -1,0 +1,20 @@
+tar xf name.tar.*
+cd name
+patch -Np1 -i ../dummy.patch
+
+./config --qwe
+
+make target1
+make target2
+
+make test1
+make test2
+
+make inst prog1
+make inst prog2
+
+mv foo bar
+
+cd ..
+rm -rf name
+

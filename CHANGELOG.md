@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2
+
+### Fixed
+
+- Buffer overflow when loading from multiple files
+
 ## 0.2.1
 
 ### Fixed
