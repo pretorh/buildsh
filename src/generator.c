@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include "generator.h"
 #include "utils.h"
 
@@ -24,6 +25,9 @@ void concat_file(char *destination, const char *file) {
         exit_failure_printf("file %s too large\n", file);
     }
 
+    while (size > 0 && isspace(buffer[size - 1])) {
+      --size;
+    }
     buffer[size] = 0;
     CONCAT_LINE(destination, buffer);
 }
