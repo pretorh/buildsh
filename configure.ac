@@ -1,4 +1,4 @@
-AC_INIT([buildsh], [0.2.1])
+AC_INIT([buildsh], [0.2.2])
 AC_PREREQ([2.68])
 
 AC_CONFIG_SRCDIR([src/main.c])
