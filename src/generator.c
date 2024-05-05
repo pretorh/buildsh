@@ -24,6 +24,7 @@ void concat_file(char *destination, const char *file) {
         exit_failure_printf("file %s too large\n", file);
     }
 
+    buffer[size] = 0;
     CONCAT_LINE(destination, buffer);
 }
 
